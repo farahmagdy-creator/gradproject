@@ -1,3 +1,22 @@
+// ─── ثوابت الحالات والوسوم ─────────────────────────────────────────────────────
+
+export const STATUS = {
+  WAITING:   "قيد الانتظار",
+  REPAIRING: "قيد الإصلاح",
+  READY:     "جاهز",
+  DELIVERED: "تم التسليم",
+  REJECTED:  "مرفوض",
+};
+
+export const TAG = {
+  URGENT:       "عاجل",
+  CALL_FIRST:   "إتصال أولا",
+};
+
+export const statusesList = ["الكل", ...Object.values(STATUS)];
+
+// ─── بيانات الإيصالات ──────────────────────────────────────────────────────────
+
 export const mockInvoices = [
   {
     id: "#1-774",
@@ -8,8 +27,8 @@ export const mockInvoices = [
     tech: "محمد عادل",
     receiveDate: "19-11-2023",
     deliveryDue: "20-11-2023",
-    status: "تم التسليم",
-    tags: ["عاجل", "إتصال أولا"],
+    status: STATUS.DELIVERED,
+    tags: [TAG.URGENT, TAG.CALL_FIRST],
     deliveredDate: "28-11-2023",
     urgent: true,
   },
@@ -22,7 +41,7 @@ export const mockInvoices = [
     tech: "علي حسن",
     receiveDate: "19-11-2023",
     deliveryDue: "21-11-2023",
-    status: "قيد الانتظار",
+    status: STATUS.WAITING,
     tags: [],
     deliveredDate: null,
     urgent: false,
@@ -36,8 +55,8 @@ export const mockInvoices = [
     tech: "محمد عادل",
     receiveDate: "21-11-2023",
     deliveryDue: "23-11-2023",
-    status: "قيد الإصلاح",
-    tags: ["عاجل"],
+    status: STATUS.REPAIRING,
+    tags: [TAG.URGENT],
     deliveredDate: null,
     urgent: true,
   },
@@ -50,8 +69,8 @@ export const mockInvoices = [
     tech: "علي حسن",
     receiveDate: "22-11-2023",
     deliveryDue: "24-11-2023",
-    status: "جاهز",
-    tags: ["إتصال أولا"],
+    status: STATUS.READY,
+    tags: [TAG.CALL_FIRST],
     deliveredDate: null,
     urgent: false,
   },
@@ -64,8 +83,8 @@ export const mockInvoices = [
     tech: "محمد عادل",
     receiveDate: "22-11-2023",
     deliveryDue: "25-11-2023",
-    status: "مرفوض",
-    tags: ["إتصال أولا"],
+    status: STATUS.REJECTED,
+    tags: [TAG.CALL_FIRST],
     deliveredDate: "28-11-2023",
     urgent: false,
   },
@@ -78,8 +97,8 @@ export const mockInvoices = [
     tech: "علي حسن",
     receiveDate: "23-11-2023",
     deliveryDue: "26-11-2023",
-    status: "تم التسليم",
-    tags: ["عاجل", "إتصال أولا"],
+    status: STATUS.DELIVERED,
+    tags: [TAG.URGENT, TAG.CALL_FIRST],
     deliveredDate: "28-11-2023",
     urgent: true,
   },
@@ -92,8 +111,8 @@ export const mockInvoices = [
     tech: "محمد عادل",
     receiveDate: "23-11-2023",
     deliveryDue: "26-11-2023",
-    status: "قيد الإصلاح",
-    tags: ["عاجل"],
+    status: STATUS.REPAIRING,
+    tags: [TAG.URGENT],
     deliveredDate: null,
     urgent: true,
   },
@@ -106,19 +125,62 @@ export const mockInvoices = [
     tech: "علي حسن",
     receiveDate: "24-11-2023",
     deliveryDue: "27-11-2023",
-    status: "قيد الانتظار",
+    status: STATUS.WAITING,
     tags: [],
     deliveredDate: null,
     urgent: false,
   },
- 
 ];
 
-export const statusesList = [
-  "الكل",
-  "قيد الانتظار",
-  "قيد الإصلاح",
-  "جاهز",
-  "تم التسليم",
-  "مرفوض",
+// ─── بيانات الداشبورد ──────────────────────────────────────────────────────────
+
+export const dashboardStats = [
+  {
+    label: "بانتظار الاستلام",
+    value: "08",
+    badge: "جاهز",
+    badgeColor: "#ffffff",
+    badgeBg: "#1d4ed8",
+    accent: "#1d4ed8",
+    accentBg: "#1d4fd838",
+    sub: "من التزامات اليوم",
+  },
+  {
+    label: "يسلم اليوم",
+    value: "14",
+    badge: "هام",
+    badgeColor: "#ba1a1a",
+    badgeBg: "#ffdad6",
+    accent: "#ba1a1a",
+    accentBg: "#ffdad6",
+    sub: "تأكد من انتهاء الصيانة قبل موعد التسليم اليوم",
+    subColor: "#ba1a1a",
+    urgent: true,
+  },
+  {
+    label: "ملاحظات اليوم",
+    value: "---",
+    badge: "ملاحظات",
+    badgeColor: "#6d5e00",
+    badgeBg: "#f9e37a",
+    accent: "#6d5e00",
+    accentBg: "#f9e37a",
+    sub: "أضف ملاحظاتك للتذكير",
+  },
+];
+
+export const mockRecentReceipts = [
+  { id: "#1-774", customerName: "محمد أحمد", phone: "+20 1012345678", device: "iPhone 15 Pro Max", issue: "شاشة", tech: null, status: STATUS.REPAIRING, due: "بعد 1 يوم",  tag: TAG.CALL_FIRST },
+  { id: "#1-775", customerName: "سارة محمود",  phone: "+20 1098765432", device: "Samsung S23",      issue: "بطارية", tech: null, status: STATUS.REPAIRING, due: "بعد 2 يوم",  tag: TAG.URGENT },
+  { id: "#1-776", customerName: "ياسين إبراهيم",phone: "+20 1234567890", device: "iPad Air",         issue: "شحن",    tech: "محمد عادل", status: STATUS.READY,     due: "بعد 3 أيام", tag: TAG.CALL_FIRST },
+  { id: "#1-777", customerName: "أحمد خالد",   phone: "+20 1122334455", device: "Huawei P50",        issue: "شاشة",   tech: "علي حسن",   status: STATUS.REPAIRING, due: "بعد 4 أيام", tag: TAG.CALL_FIRST },
+  { id: "#1-778", customerName: "منى سعيد",    phone: "+20 1555666777", device: "Xiaomi 12",          issue: "ميكروفون",tech: null,       status: STATUS.WAITING,   due: "بعد 5 أيام", tag: TAG.URGENT },
+];
+
+export const mockTodayDeliveries = [
+  { id: "#1-780", customerName: "عمر فاروق",   phone: "+20 1777888999", device: "iPhone 15 Pro Max", issue: "شاشة",    tech: null, status: STATUS.READY,     due: "بعد 1 ساعة", tag: TAG.CALL_FIRST },
+  { id: "#1-781", customerName: "نورا حسام",   phone: "+20 1000111222", device: "iPhone 15 Pro Max", issue: "بطارية",  tech: null, status: STATUS.READY,     due: "10م",         tag: TAG.CALL_FIRST },
+  { id: "#1-782", customerName: "محمد أحمد",   phone: "+20 1012345678", device: "iPhone 15 Pro Max", issue: "شاشة",    tech: null, status: STATUS.READY,     due: "12م",         tag: TAG.CALL_FIRST },
+  { id: "#1-783", customerName: "سارة محمود",  phone: "+20 1098765432", device: "iPhone 15 Pro Max", issue: "كاميرا",  tech: null, status: STATUS.REPAIRING, due: "1ص",          tag: TAG.URGENT },
+  { id: "#1-784", customerName: "أحمد خالد",   phone: "+20 1122334455", device: "iPhone 15 Pro Max", issue: "شحن",     tech: null, status: STATUS.REPAIRING, due: "2ص",          tag: TAG.URGENT },
 ];

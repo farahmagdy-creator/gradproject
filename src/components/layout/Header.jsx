@@ -27,8 +27,8 @@ function Header({ activePage, setActivePage, setShowForm }) {
       }}
     >
       <span className="fw-bold" style={{ fontSize: "18px" }}>
-  <span style={{ color: "#0d6efd" }}>Fix</span>
-  <span style={{ color: "#F5A623" }}>Flow</span>
+  <span style={{ color: "#0a2f5c" }}>Fix</span>
+  <span style={{ color: "#f5a623" }}>Flow</span>
 </span>
 
       <div className="d-flex gap-4">
@@ -38,10 +38,10 @@ function Header({ activePage, setActivePage, setShowForm }) {
             onClick={() => { setActivePage(link.key); setShowForm(false); }}
             style={{
               cursor: "pointer",
-              color: activePage === link.key ? "#0d6efd" : "#6c757d",
+              color: activePage === link.key ? "#1d4ed8" : "#78716c",
               fontWeight: activePage === link.key ? "600" : "normal",
               fontSize: "14px",
-              borderBottom: activePage === link.key ? "2px solid #0d6efd" : "none",
+              borderBottom: activePage === link.key ? "2px solid #1d4ed8" : "none",
               paddingBottom: "2px",
             }}
           >

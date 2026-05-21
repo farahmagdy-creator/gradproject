@@ -13,8 +13,8 @@ const FilterBar = ({
   return (
     <div className="mb-4">
       <div className="text-end mb-3">
-        <h4 className="fw-bold mb-1">إدارة الإيصالات</h4>
-        <p className="text-muted mb-0" style={{ fontSize: "13px" }}>
+        <h4 className="fw-bold mb-1" style={{fontSize: '36px', color: "#1b1c1d"}}>إدارة الإيصالات</h4>
+        <p className="text-muted mb-0" style={{ fontSize: "16px", color: "#434653" }}>
           مراقبة وإدارة سجلات الإيصالات
         </p>
       </div>
@@ -63,10 +63,10 @@ const FilterBar = ({
                 borderRadius: "8px",
                 backgroundColor:
                   activeFilter === status && !showUrgentOnly
-                    ? "#0d6efd"
-                    : "#f1f3f5",
+                    ? "#094cb2"
+                    : "#e9e8e9",
                 color:
-                  activeFilter === status && !showUrgentOnly ? "#fff" : "#333",
+                  activeFilter === status && !showUrgentOnly ? "#ffffff" : "#434653",
                 border: "none",
                 fontSize: "13px",
               }}
@@ -83,9 +83,9 @@ const FilterBar = ({
             className="btn btn-sm px-3 fw-bold"
             style={{
               borderRadius: "8px",
-              backgroundColor: showUrgentOnly ? "#dc3545" : "#fff",
-              color: showUrgentOnly ? "#fff" : "#dc3545",
-              border: "1.5px solid #dc3545",
+              backgroundColor: showUrgentOnly ? "#ba1a1a" : "#ffffff",
+              color: showUrgentOnly ? "#ffffff" : "#ba1a1a",
+              border: "1.5px solid #ba1a1a",
               fontSize: "13px",
             }}
           >

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import FilterBar from "../components/FilterBar/FilterBar";
 import InvoicesTable from "../components/InvoicesTable/InvoicesTable";
 import Pagination from "../components/Pagination/Pagination";
@@ -20,28 +20,26 @@ const InvoicesPage = ({ setActivePage, setSelectedReceipt }) => {
     filteredInvoices,
   } = useInvoiceFilter(mockInvoices);
 
-  const handleFilterChange = (status) => {
-    setActiveFilter(status);
-    setCurrentPage(1);
+  const handleFilterChange = (status) => { setActiveFilter(status);  setCurrentPage(1); };
+  const handleUrgentToggle = (val)    => { setShowUrgentOnly(val);   setCurrentPage(1); };
+  const handleSearch       = (query)  => { setSearchQuery(query);    setCurrentPage(1); };
+
+  const handleView = (invoice) => {
+    setSelectedReceipt?.(invoice);
+    setActivePage?.("receipt-details");
   };
 
-  const handleUrgentToggle = (val) => {
-    setShowUrgentOnly(val);
-    setCurrentPage(1);
-  };
-
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-    setCurrentPage(1);
-  };
+  const totalPages = Math.ceil(filteredInvoices.length / ITEMS_PER_PAGE);
 
   const paginated = filteredInvoices.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
 
+  const countLabel = `عرض ${Math.min(currentPage * ITEMS_PER_PAGE, filteredInvoices.length)} من أصل ${filteredInvoices.length} إيصال`;
+
   return (
-    <div>
+    <div style={{ direction: "rtl", backgroundColor: "#f5f6fa", minHeight: "100vh", padding: "28px" }}>
       <FilterBar
         activeFilter={activeFilter}
         setActiveFilter={handleFilterChange}
@@ -50,11 +48,12 @@ const InvoicesPage = ({ setActivePage, setSelectedReceipt }) => {
         searchQuery={searchQuery}
         setSearchQuery={handleSearch}
       />
-      <InvoicesTable data={paginated} setActivePage={setActivePage} setSelectedReceipt={setSelectedReceipt} />
-      <Pagination
+      <InvoicesTable
+        data={paginated}
+        onView={handleView}
+        countLabel={countLabel}
         currentPage={currentPage}
-        totalItems={filteredInvoices.length}
-        itemsPerPage={ITEMS_PER_PAGE}
+        totalPages={totalPages}
         onPageChange={setCurrentPage}
       />
     </div>

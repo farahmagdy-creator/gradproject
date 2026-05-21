@@ -1,25 +1,39 @@
 import { useState, useEffect } from "react";
 
+const STORAGE_KEYS = {
+  filter: "fixflow_filter",
+  urgent: "fixflow_urgent",
+};
+
+/**
+ * useInvoiceFilter
+ * يتحكم في فلترة الإيصالات (حالة + عاجل + بحث).
+ * يحفظ اختيارات الفلتر في localStorage عشان تفضل بعد التنقل.
+ *
+ * @param {Array} invoices - مصفوفة الإيصالات الكاملة
+ */
 export const useInvoiceFilter = (invoices) => {
-  const [activeFilter, setActiveFilter] = useState(() => {
-    return localStorage.getItem("fixflow_filter") || "الكل";
-  });
-  const [showUrgentOnly, setShowUrgentOnly] = useState(() => {
-    return localStorage.getItem("fixflow_urgent") === "true";
-  });
+  const [activeFilter, setActiveFilterState] = useState(
+    () => localStorage.getItem(STORAGE_KEYS.filter) || "الكل"
+  );
+  const [showUrgentOnly, setShowUrgentOnlyState] = useState(
+    () => localStorage.getItem(STORAGE_KEYS.urgent) === "true"
+  );
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredInvoices, setFilteredInvoices] = useState(invoices);
 
-  const handleSetActiveFilter = (val) => {
-    setActiveFilter(val);
-    localStorage.setItem("fixflow_filter", val);
+  // ── setters مع localStorage sync ─────────────────────────────────────────
+  const setActiveFilter = (val) => {
+    setActiveFilterState(val);
+    localStorage.setItem(STORAGE_KEYS.filter, val);
   };
 
-  const handleSetShowUrgentOnly = (val) => {
-    setShowUrgentOnly(val);
-    localStorage.setItem("fixflow_urgent", val);
+  const setShowUrgentOnly = (val) => {
+    setShowUrgentOnlyState(val);
+    localStorage.setItem(STORAGE_KEYS.urgent, val);
   };
 
+  // ── منطق الفلترة ──────────────────────────────────────────────────────────
   useEffect(() => {
     let result = [...invoices];
 
@@ -46,9 +60,9 @@ export const useInvoiceFilter = (invoices) => {
 
   return {
     activeFilter,
-    setActiveFilter: handleSetActiveFilter,
+    setActiveFilter,
     showUrgentOnly,
-    setShowUrgentOnly: handleSetShowUrgentOnly,
+    setShowUrgentOnly,
     searchQuery,
     setSearchQuery,
     filteredInvoices,

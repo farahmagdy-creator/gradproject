@@ -18,7 +18,7 @@ const DeviceImage = ({ imageUrl, fileName, date }) => {
       <div className="position-relative rounded-3 overflow-hidden shadow-sm">
         {/* الصورة الآن ديناميكية تماماً تأخذ القيمة من الـ props فقط */}
         <img 
-          src={imageUrl} 
+          src="image/iphone.jpg" 
           alt="Device Condition" 
           className="img-fluid w-100"
           style={{ objectFit: 'cover', minHeight: '250px' }}

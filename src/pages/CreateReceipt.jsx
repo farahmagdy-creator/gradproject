@@ -79,19 +79,20 @@ function CreateReceipt({ setShowForm }) {
           <div className="d-flex gap-3">
             <button
               type="button"
-              className="btn btn-secondary px-4"
+              className="btn px-4"
               onClick={() => {
                 reset();
                 setShowForm(false);
               }}
+              style={{background: "#e7e5e4"}}
             >
               إلغاء
             </button>
 
             <button
               type="submit"
-              className="btn btn-primary-custom px-4 d-flex align-items-center gap-2"
-              style={{ cursor: "pointer", background: "var(--primary-color)", border: "none" }}
+              className="btn px-4 d-flex align-items-center gap-2"
+              style={{ cursor: "pointer",color: "#ffffff", background: "linear-gradient(to right, #094cb2, #3366cc)", border: "none" }}
             >
               {loading ? "جاري التنفيذ..." : "إصدار الإيصال"}
             </button>

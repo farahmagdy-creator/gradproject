@@ -3,7 +3,7 @@
 export const STATUS = {
   WAITING:   "قيد الانتظار",
   REPAIRING: "قيد الإصلاح",
-  READY:     "جاهز",
+  READY:     "جاهز للتسليم",
   DELIVERED: "تم التسليم",
   REJECTED:  "مرفوض",
 };

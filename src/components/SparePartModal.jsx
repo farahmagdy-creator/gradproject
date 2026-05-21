@@ -31,7 +31,7 @@ const SparepartModal = ({ show, onClose }) => {
         {/* Header */}
         <div className="d-flex align-items-center justify-content-between mb-4">
           <div className="d-flex align-items-center gap-2">
-            <ShoppingCart size={20} className="text-primary" />
+            <ShoppingCart size={20} style={{color: "#0f4391"}} />
             <h6 className="mb-0 fw-bold">طلب قطعة غيار</h6>
           </div>
           <button className="btn btn-sm btn-light rounded-circle" onClick={onClose}>
@@ -78,7 +78,9 @@ const SparepartModal = ({ show, onClose }) => {
         </div>
 
         {/* تأكيد توفر القطعة */}
-        <div className="mb-4 p-3 bg-light rounded-3 d-flex align-items-center justify-content-between">
+        <div className="mb-4 p-3 rounded-3 d-flex align-items-center justify-content-between"
+        style={{ background: "#f2f4f6" }}
+        >
           <div>
             <p className="mb-0 small fw-semibold">هل تأكدت من توفر القطعة لدى المورد؟</p>
             <p className="mb-0 text-muted" style={{ fontSize: "11px" }}>
@@ -98,11 +100,15 @@ const SparepartModal = ({ show, onClose }) => {
 
         {/* Buttons */}
         <div className="d-flex gap-2">
-          <button className="btn btn-primary flex-grow-1 fw-bold" onClick={handleSubmit}>
+          <button className="btn flex-grow-1 fw-bold" onClick={handleSubmit}
+          style={{background: "#003178", color: "#ffffff" }}
+          >
             <ShoppingCart size={15} className="me-1" />
             إرسال الطلب
           </button>
-          <button className="btn btn-light flex-grow-1" onClick={onClose}>
+          <button className="btn flex-grow-1" onClick={onClose}
+          style={{background: "#e7e5e4"}}
+          >
             إلغاء
           </button>
         </div>

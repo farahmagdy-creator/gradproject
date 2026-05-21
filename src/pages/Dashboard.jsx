@@ -71,7 +71,7 @@ function Dashboard() {
               <div style={{ fontWeight: "600", fontSize: "14px", color: "#374151", marginBottom: "8px" }}>
                 {s.label}
               </div>
-              <div style={{ fontSize: "12px", color: s.subColor || "#9ca3af" }}>
+              <div style={{ fontSize: "12px", color: s.subColor || "#9ca3af", fontWeight: "bold" }}>
                 {s.sub}
               </div>
             </div>
@@ -89,7 +89,6 @@ function Dashboard() {
           countLabel={`عرض ${recentReceipts.length} من أصل ${recentReceipts.length} إيصال`}
           onPrev={ () => {}}
           onNext={ () => {}}
-
         />
       </div>
 
@@ -101,7 +100,7 @@ function Dashboard() {
         columns={DASHBOARD_COLUMNS}
         countLabel={`عرض ${todayDeliveries.length} من أصل ${todayDeliveries.length} إيصال`}
         onPrev={ () => {}}
-         onNext={ () => {}}
+        onNext={ () => {}}
       />
 
     </div>

@@ -6,7 +6,7 @@ const STATUS_STYLE = {
  "تم التسليم":  { color: "#f6f6f6", background: "#28A745" },
  "قيد الانتظار":{ color: "#940fc9", background: "transparent", border: "1.5px solid #940fc9" },
  "قيد الإصلاح": { color: "#211b00", background: "#F9E37A" },
- "جاهز":        { color: "#1e40af", background: "#dbeafe" },
+ "جاهز للتسليم":        { color: "#ffffff", background: "#007bff" },
  "مرفوض":       { color: "#ffffff", background: "#dc3545" },
 };
 
@@ -41,7 +41,7 @@ const ReceiptTableRow = ({ invoice, columns, onView }) => {
    ),
 
    issue: (
-     <td key="issue" style={{ padding: "12px", color: "#602100" }}>
+     <td key="issue" style={{ padding: "12px", color: "#602100", fontWeight: "bold" }}>
        {invoice.issue}
      </td>
    ),
@@ -111,7 +111,7 @@ const ReceiptTableRow = ({ invoice, columns, onView }) => {
  };
 
  return (
-   <tr style={{ borderTop: "1px solid #f3f4f6", fontSize: "13px" }}>
+   <tr style={{ borderTop: "1px solid #f3f4f6", fontSize: "13px", textAlign: "right" }}>
      {columns.map((col) => cellMap[col])}
    </tr>
  );

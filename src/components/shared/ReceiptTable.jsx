@@ -61,7 +61,7 @@ const ReceiptTable = ({
             <thead>
               <tr style={{ background: "#f2f4f6" }}>
                 {columns.map((col) => (
-                  <th key={col.key} style={{ textAlign: "center", fontWeight: "600", padding: "12px", color: "#6b7280", whiteSpace: "normal", wordBreak: "break-word", lineHeight: "1.3", fontSize: "12px", borderBottom: "1px solid #e5e7eb" }}>
+                  <th key={col.key} style={{ textAlign: "right", fontWeight: "600", padding: "12px", color: "#6b7280", whiteSpace: "normal", wordBreak: "break-word", lineHeight: "1.3", fontSize: "12px", borderBottom: "1px solid #e5e7eb" }}>
                     {col.label}
                   </th>
                 ))}
@@ -89,10 +89,10 @@ const ReceiptTable = ({
           {/* Pagination الداشبورد */}
           {hasDashboardPagination && (
             <div style={{ display: "flex", gap: "8px" }}>
-              <button onClick={onPrev} style={{ background: "#fff", border: "1px solid #e5e7eb", color: "#374151", width: 32, height: 32, borderRadius: "6px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <button onClick={onPrev} style={{ background: "#ffffff", border: "1px solid #e5e7eb", color: "#374151", width: 32, height: 32, borderRadius: "6px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <ChevronRight size={14} />
               </button>
-              <button onClick={onNext} style={{ background: "#fff", border: "1px solid #e5e7eb", color: "#374151", width: 32, height: 32, borderRadius: "6px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <button onClick={onNext} style={{ background: "#ffffff", border: "1px solid #e5e7eb", color: "#374151", width: 32, height: 32, borderRadius: "6px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <ChevronLeft size={14} />
               </button>
             </div>
@@ -104,14 +104,14 @@ const ReceiptTable = ({
               <button
                 onClick={() => onPageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                style={{ background: "#fff", border: "1px solid #e5e7eb", color: currentPage === 1 ? "#d1d5db" : "#374151", width: 32, height: 32, borderRadius: "6px", cursor: currentPage === 1 ? "default" : "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
+                style={{ background: "#ffffff", border: "1px solid #e5e7eb", color: currentPage === 1 ? "#d1d5db" : "#374151", width: 32, height: 32, borderRadius: "6px", cursor: currentPage === 1 ? "default" : "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
               >
                 <ChevronRight size={14} />
               </button>
               <button
                 onClick={() => onPageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                style={{ background: "#fff", border: "1px solid #e5e7eb", color: currentPage === totalPages ? "#d1d5db" : "#374151", width: 32, height: 32, borderRadius: "6px", cursor: currentPage === totalPages ? "default" : "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
+                style={{ background: "#ffffff", border: "1px solid #e5e7eb", color: currentPage === totalPages ? "#d1d5db" : "#374151", width: 32, height: 32, borderRadius: "6px", cursor: currentPage === totalPages ? "default" : "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
               >
                 <ChevronLeft size={14} />
               </button>

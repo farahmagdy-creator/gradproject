@@ -7,7 +7,7 @@ import { mockInvoices } from "../data/mockData";
 
 const ITEMS_PER_PAGE = 10;
 
-const InvoicesPage = () => {
+const InvoicesPage = ({ setActivePage, setSelectedReceipt }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const {
@@ -50,7 +50,7 @@ const InvoicesPage = () => {
         searchQuery={searchQuery}
         setSearchQuery={handleSearch}
       />
-      <InvoicesTable data={paginated} />
+      <InvoicesTable data={paginated} setActivePage={setActivePage} setSelectedReceipt={setSelectedReceipt} />
       <Pagination
         currentPage={currentPage}
         totalItems={filteredInvoices.length}

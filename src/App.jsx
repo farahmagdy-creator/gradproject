@@ -17,21 +17,30 @@ import ReceiptDetails from "./pages/ReceiptDetails";
 import CreateReceipt  from "./pages/CreateReceipt";
 import ReceptionProfile  from "./pages/ReceptionProfile";
 
-
 /* ── Technician layout ── */
 import TechDashboardLayout from "./technician/layout/TechDashboardLayout";
 
 function ReceptionistApp() {
   const { logout } = useAuth();
-  const [showForm,   setShowForm]   = useState(false);
-  const [activePage, setActivePage] = useState("dashboard");
+  const [showForm, setShowForm] = useState(false);
+
+  const [activePage, setActivePage] = useState(() => {
+    return localStorage.getItem("fixflow_activePage") || "dashboard";
+  });
+
+  const [selectedReceipt, setSelectedReceipt] = useState(null);
+
+  const handleSetActivePage = (page) => {
+    setActivePage(page);
+    localStorage.setItem("fixflow_activePage", page);
+  };
 
   const renderPage = () => {
-    if (showForm)                   return <CreateReceipt setShowForm={setShowForm} />;
-    if (activePage === "dashboard") return <Dashboard />;
-    if (activePage === "orders")    return <InvoicesPage />;
-    if (activePage === "receipts")  return <ReceiptDetails />;
-    if (activePage === "profile")   return <ReceptionProfile />;
+    if (showForm)                          return <CreateReceipt setShowForm={setShowForm} />;
+    if (activePage === "dashboard")        return <Dashboard />;
+    if (activePage === "receipts")         return <InvoicesPage setActivePage={handleSetActivePage} setSelectedReceipt={setSelectedReceipt} />;
+    if (activePage === "receipt-details")  return <ReceiptDetails receiptData={selectedReceipt || {}} />;
+    if (activePage === "profile")          return <ReceptionProfile />;
     return <Dashboard />;
   };
 
@@ -39,14 +48,14 @@ function ReceptionistApp() {
     <>
       <Header
         activePage={activePage}
-        setActivePage={setActivePage}
+        setActivePage={handleSetActivePage}
         setShowForm={setShowForm}
       />
       <Sidebar
         activePage={activePage}
-        setActivePage={setActivePage}
+        setActivePage={handleSetActivePage}
         setShowForm={setShowForm}
-         logout={logout}  
+        logout={logout}
       />
       <main
         dir="rtl"
@@ -67,39 +76,30 @@ function ReceptionistApp() {
 
 function RootRouter() {
   const { user } = useAuth();
-
-  /* حالة الـ auth screen: "login" | "register" */
   const [authScreen, setAuthScreen] = useState("login");
 
-  /* لو مفيش يوزر → صفحات الـ auth */
   if (!user) {
     if (authScreen === "register") {
       return (
         <RegisterPage
           onNavigateLogin={() => setAuthScreen("login")}
-          onLoginSuccess={() => {/* after register, user is set in context */}}
+          onLoginSuccess={() => {}}
         />
       );
     }
     return (
       <LoginPage
         onNavigateRegister={() => setAuthScreen("register")}
-        onLoginSuccess={() => {/* user is set in context, re-render happens */}}
+        onLoginSuccess={() => {}}
       />
     );
   }
 
-  /* لو يوزر موجود → حسب الـ role */
-  if (user.role === "technician")  return <TechDashboardLayout />;
+  if (user.role === "technician")   return <TechDashboardLayout />;
   if (user.role === "receptionist") return <ReceptionistApp />;
-
-  /* fallback */
   return <ReceptionistApp />;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   App — wraps everything with AuthProvider
-═══════════════════════════════════════════════════════════════════════════ */
 function App() {
   return (
     <AuthProvider>

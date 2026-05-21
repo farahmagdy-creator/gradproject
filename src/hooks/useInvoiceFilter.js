@@ -1,10 +1,24 @@
 import { useState, useEffect } from "react";
 
 export const useInvoiceFilter = (invoices) => {
-  const [activeFilter, setActiveFilter] = useState("الكل");
-  const [showUrgentOnly, setShowUrgentOnly] = useState(false);
+  const [activeFilter, setActiveFilter] = useState(() => {
+    return localStorage.getItem("fixflow_filter") || "الكل";
+  });
+  const [showUrgentOnly, setShowUrgentOnly] = useState(() => {
+    return localStorage.getItem("fixflow_urgent") === "true";
+  });
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredInvoices, setFilteredInvoices] = useState(invoices);
+
+  const handleSetActiveFilter = (val) => {
+    setActiveFilter(val);
+    localStorage.setItem("fixflow_filter", val);
+  };
+
+  const handleSetShowUrgentOnly = (val) => {
+    setShowUrgentOnly(val);
+    localStorage.setItem("fixflow_urgent", val);
+  };
 
   useEffect(() => {
     let result = [...invoices];
@@ -32,9 +46,9 @@ export const useInvoiceFilter = (invoices) => {
 
   return {
     activeFilter,
-    setActiveFilter,
+    setActiveFilter: handleSetActiveFilter,
     showUrgentOnly,
-    setShowUrgentOnly,
+    setShowUrgentOnly: handleSetShowUrgentOnly,
     searchQuery,
     setSearchQuery,
     filteredInvoices,

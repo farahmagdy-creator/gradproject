@@ -3,8 +3,8 @@ import { Bell } from "lucide-react";
 function Header({ activePage, setActivePage, setShowForm }) {
   const navLinks = [
     { label: "لوحة التحكم", key: "dashboard" },
-    { label: "الطلبات",     key: "orders"    },
     { label: "الإيصالات",   key: "receipts"  },
+    { label: "الاعدادات",     key: "settings"  },
   ];
 
   return (

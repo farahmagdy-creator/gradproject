@@ -6,13 +6,11 @@ import ImageUploader from "../components/receipt/ImageUploader";
 import TechnicianSection from "../components/receipt/TechnicianSection";
 
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 import { Receipt, Info } from "lucide-react";
 import toast from "react-hot-toast";
 
 function CreateReceipt({ setShowForm }) {
   const form = useReceiptForm();
-  const history = useHistory();
 
   const {
     handleSubmit,
@@ -31,7 +29,6 @@ function CreateReceipt({ setShowForm }) {
       await new Promise((resolve) => setTimeout(resolve, 1200));
       console.log(data);
       toast.success("تم إنشاء الإيصال بنجاح");
-      history.push("/all-receipts");
       reset();
       setShowForm(false);
     } catch (err) {

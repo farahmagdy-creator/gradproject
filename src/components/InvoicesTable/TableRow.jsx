@@ -14,7 +14,7 @@ const tagStyle = {
   "إتصال أولا": { backgroundColor: "#2E63C9", color: "#fff" },
 };
 
-const TableRow = ({ invoice }) => {
+const TableRow = ({ invoice, setActivePage, setSelectedReceipt }) => {
   const sStyle = statusStyle[invoice.status] || { backgroundColor: "#e9ecef", color: "#333" };
 
   return (
@@ -89,6 +89,10 @@ const TableRow = ({ invoice }) => {
             border: "none",
             fontSize: "13px",
             fontWeight: "600",
+          }}
+          onClick={() => {
+            if (setSelectedReceipt) setSelectedReceipt(invoice);
+            if (setActivePage) setActivePage("receipt-details");
           }}
         >
           <Eye size={15} />

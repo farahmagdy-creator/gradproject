@@ -7,7 +7,6 @@ function Sidebar({ activePage, setActivePage, setShowForm, logout }) {
 
   const navItems = [
     { label: "لوحة التحكم", key: "dashboard", icon: <LayoutDashboard size={18} /> },
-    { label: "الطلبات",     key: "orders",    icon: <FileText size={18} />        },
     { label: "الإيصالات",   key: "receipts",  icon: <Receipt size={18} />         },
     { label: "الملف الشخصي و الأداء", key: "profile", icon: <User size={18} /> },
   ];

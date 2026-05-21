@@ -1,7 +1,5 @@
 import { createContext, useContext, useState } from "react";
 
-// ─── بيانات المستخدمين (Mock) ──────────────────────────────────────────────
-// في الإنتاج: هيتم استبدالها بـ API calls حقيقية
 const MOCK_USERS = [
   {
     id: 1,
@@ -23,14 +21,19 @@ const MOCK_USERS = [
   },
 ];
 
-// ─── Context ───────────────────────────────────────────────────────────────
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem("fixflow_user");
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
   const [authError, setAuthError] = useState("");
 
-  // تسجيل الدخول
   const login = (email, password) => {
     setAuthError("");
     const found = MOCK_USERS.find(
@@ -38,16 +41,15 @@ export function AuthProvider({ children }) {
     );
     if (found) {
       setUser(found);
+      localStorage.setItem("fixflow_user", JSON.stringify(found));
       return { success: true, role: found.role };
     }
     setAuthError("البريد الإلكتروني أو كلمة المرور غير صحيحة");
     return { success: false };
   };
 
-  // تسجيل شركة جديدة (Receptionist)
   const registerCompany = (data) => {
     setAuthError("");
-    // Mock: نقبل أي تسجيل جديد
     const newUser = {
       id: Date.now(),
       email: data.email,
@@ -57,25 +59,25 @@ export function AuthProvider({ children }) {
       shopName: data.companyName,
     };
     setUser(newUser);
+    localStorage.setItem("fixflow_user", JSON.stringify(newUser));
     return { success: true, role: "receptionist" };
   };
 
-  // تسجيل الخروج
   const logout = () => {
     setUser(null);
+    localStorage.removeItem("fixflow_user");
+    localStorage.removeItem("fixflow_activePage");
+    localStorage.removeItem("fixflow_filter");
     setAuthError("");
   };
 
   return (
-    <AuthContext.Provider
-      value={{ user, authError, login, registerCompany, logout }}
-    >
+    <AuthContext.Provider value={{ user, authError, login, registerCompany, logout }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-// Hook مساعد
 export function useAuth() {
   return useContext(AuthContext);
 }

@@ -15,7 +15,7 @@ const headers = [
   "الإجراء",
 ];
 
-const InvoicesTable = ({ data }) => {
+const InvoicesTable = ({ data, setActivePage, setSelectedReceipt }) => {
   if (!data.length) {
     return (
       <div
@@ -48,7 +48,7 @@ const InvoicesTable = ({ data }) => {
         </thead>
         <tbody>
           {data.map((item) => (
-            <TableRow key={item.id} invoice={item} />
+            <TableRow key={item.id} invoice={item} setActivePage={setActivePage} setSelectedReceipt={setSelectedReceipt} />
           ))}
         </tbody>
       </table>

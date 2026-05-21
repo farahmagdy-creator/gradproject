@@ -5,14 +5,13 @@ function Header({ activePage, setActivePage, setShowForm }) {
     { label: "لوحة التحكم", key: "dashboard" },
     { label: "الطلبات",     key: "orders"    },
     { label: "الإيصالات",   key: "receipts"  },
-    { label: "الإعدادات",   key: "settings"  },
   ];
 
   return (
     <div
       style={{
         height: "56px",
-        backgroundColor: "#fff",
+        backgroundColor: "#fafaf9",
         borderBottom: "1px solid #e9ecef",
         display: "flex",
         alignItems: "center",
@@ -23,12 +22,14 @@ function Header({ activePage, setActivePage, setShowForm }) {
         top: 0,
         left: 0,
         right: 0,
+        bottom: 10,
         zIndex: 1050,
       }}
     >
-      <span className="fw-bold" style={{ color: "#0d6efd", fontSize: "18px" }}>
-        FixFlow
-      </span>
+      <span className="fw-bold" style={{ fontSize: "18px" }}>
+  <span style={{ color: "#0d6efd" }}>Fix</span>
+  <span style={{ color: "#F5A623" }}>Flow</span>
+</span>
 
       <div className="d-flex gap-4">
         {navLinks.map((link) => (
@@ -49,18 +50,22 @@ function Header({ activePage, setActivePage, setShowForm }) {
         ))}
       </div>
 
-      <div className="d-flex align-items-center gap-3">
-        <Bell size={20} color="#6c757d" style={{ cursor: "pointer" }} />
-        <div
-          style={{
-            width: 34,
-            height: 34,
-            borderRadius: "50%",
-            backgroundColor: "#dee2e6",
-            cursor: "pointer",
-          }}
-        />
-      </div>
+     {/* Right: bell + avatar */}
+        <div className="d-flex align-items-center gap-3">
+          <Bell size={20} color="#6c757d" style={{ cursor: "pointer" }} />
+          <img
+            src="image/tech nav photo.jpg"
+            alt="avatar"
+            style={{
+              width: 34,
+              height: 34,
+              borderRadius: "50%",
+              objectFit: "cover",
+              cursor: "pointer",
+              boxShadow: "0 2px 8px rgba(37,99,235,.2)",
+            }}
+          />
+        </div>
     </div>
   );
 }

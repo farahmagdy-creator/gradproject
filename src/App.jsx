@@ -15,6 +15,8 @@ import Dashboard     from "./pages/Dashboard";
 import InvoicesPage  from "./pages/InvoicesPage";
 import ReceiptDetails from "./pages/ReceiptDetails";
 import CreateReceipt  from "./pages/CreateReceipt";
+import ReceptionProfile  from "./pages/ReceptionProfile";
+
 
 /* ── Technician layout ── */
 import TechDashboardLayout from "./technician/layout/TechDashboardLayout";
@@ -29,6 +31,7 @@ function ReceptionistApp() {
     if (activePage === "dashboard") return <Dashboard />;
     if (activePage === "orders")    return <InvoicesPage />;
     if (activePage === "receipts")  return <ReceiptDetails />;
+    if (activePage === "profile")   return <ReceptionProfile />;
     return <Dashboard />;
   };
 
@@ -43,6 +46,7 @@ function ReceptionistApp() {
         activePage={activePage}
         setActivePage={setActivePage}
         setShowForm={setShowForm}
+         logout={logout}  
       />
       <main
         dir="rtl"

@@ -31,9 +31,10 @@ function TechHeader({ activePage, setActivePage }) {
       }}
     >
         {/* Logo */}
-        <span className="fw-bold" style={{ color: "#0d6efd", fontSize: "18px" }}>
-          FixFlow
-        </span>
+        <span className="fw-bold" style={{ fontSize: "18px" }}>
+  <span style={{ color: "#0d6efd" }}>Fix</span>
+  <span style={{ color: "#F5A623" }}>Flow</span>
+</span>
 
         {/* Nav links */}
         <div className="d-flex gap-4">

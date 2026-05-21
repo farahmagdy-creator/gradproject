@@ -7,14 +7,14 @@ import {
   IdCard,
 } from "lucide-react";
 
-const tech = {
-  name: "حازم علي",
-  role: "فني سوفتوير و هاردوير ايفون",
-  techId: "EMP-001",
-  phone: "1060165515 20+",
-  nationalId: "30308060800755",
-  email: "belalgamal1541@gmail.com",
-  address: "221 شارع ملك حفني - ميامي",
+const receptionist = {
+  name: "إسراء أحمد",
+  role: "موظفة استقبال",
+  receptionId: "EMP-002",
+  phone: "1284167715 20+",
+  nationalId: "30308200403786",
+  email: "esraaahmed1541@gmail.com",
+  address: "221 شارع 45 - العصافرة",
   age: "23",
   hireDate: "1 May 2021",
 };
@@ -41,7 +41,7 @@ function StatCard({ title, value, sub, color, icon }) {
     <div
       className="p-3 rounded-4 shadow-sm"
       style={{
-        width: "380px",
+        width: "555px",
         height: "180px",
         background: "#e0e3e5",
         borderRight: `5px solid ${color}`,
@@ -63,7 +63,7 @@ function StatCard({ title, value, sub, color, icon }) {
   );
 }
 
-function TechProfile() {
+function ReceptionProfile() {
   return (
     <div dir="rtl" className="p-4">
 
@@ -77,20 +77,20 @@ function TechProfile() {
             className="fw-bold mb-2"
             style={{ color: COLORS.primary, fontSize: "42px", lineHeight: "1" }}
           >
-            {tech.name}
+            {receptionist.name}
           </h1>
           <p className="mb-0 text-secondary" style={{ fontSize: "20px" }}>
-            {tech.role}
+            {receptionist.role}
           </p>
         </div>
 
         <div className="d-flex align-items-center gap-4" style={{ direction: "ltr" }}>
           <div
             className="rounded-4 p-0"
-            style={{ background: "#dfe3e7", transform: "translate(-22px, -22px)" }}
+            style={{ background: "#dfe3e7", transform: "translate(-20px, -20px)" }}
           >
             <img
-              src="image/Technician profile.jpg"
+              src="image/reception.png"
               alt="avatar"
               className="rounded-4"
               style={{
@@ -107,7 +107,7 @@ function TechProfile() {
               className="rounded-3 px-4 py-2 fw-semibold text-secondary d-flex align-items-center gap-2"
               style={{ fontSize: "18px", width: "fit-content", backgroundColor: "#dadada" }}
             >
-              {tech.techId}
+              {receptionist.receptionId}
               <IdCard size={18} style={{color: "#094cb2"}}/>
             </div>
            
@@ -119,30 +119,16 @@ function TechProfile() {
       <div className="d-flex justify-content-center gap-3 mb-5">
         <StatCard
           title="إجمالي عمليات الإصلاح"
-          value="284"
+          value="788"
           sub="+12% this month"
           color={COLORS.primary}
           icon={<Wrench size={22} />}
         />
         <StatCard
-          title="معدل نجاح عملية الصيانة"
-          value="90%"
-          sub="284 reviews"
+          title="معدل دقة بيانات الاستلام"
+          value="95%"
+          sub="788 reviews"
           color={COLORS.green}
-          icon={<Star size={22} />}
-        />
-        <StatCard
-          title="معدل سرعة التسليم"
-          value="98%"
-          sub="High Speed"
-          color={COLORS.slate}
-          icon={<Zap size={22} />}
-        />
-        <StatCard
-          title="معدل المراجعات"
-          value="10%"
-          sub="450 reviews"
-          color={COLORS.brown}
           icon={<Star size={22} />}
         />
       </div>
@@ -163,12 +149,12 @@ function TechProfile() {
           </div>
           <div className="rounded-4 px-3 py-1" style={{ background: "#eceef0" }}>
             {[
-              { label: "رقم الهاتف",       value: tech.phone },    
-              { label: "البريد الإلكتروني", value: tech.email },
-              { label: "العنوان",          value: tech.address },
-              { label: "الرقم القومي",     value: tech.nationalId },
-              { label: "العمر",          value: tech.age },
-              { label: "تاريخ التعيين",   value: "1 May 2021" },
+              { label: "رقم الهاتف",       value: receptionist.phone },
+              { label: "البريد الإلكتروني", value: receptionist.email },
+              { label: "العنوان",          value: receptionist.address },
+              { label: "الرقم القومي",     value: receptionist.nationalId },
+              { label: "العمر",          value: receptionist.age },
+              { label: "تاريخ الانضمام",   value: "1 May 2021" },
             ].map(({ label, value }, i, arr) => (
               <div
                 key={label}
@@ -206,7 +192,7 @@ function TechProfile() {
           </div>
         </div>
 
-        {/* الصلاحيات الممنوحة - full width */}
+        {/* الصلاحيات الممنوحة */}
         <div className="col-12 mt-2">
 
           <div className="d-flex align-items-center gap-2 mb-3 mt-3">
@@ -252,4 +238,4 @@ function TechProfile() {
   );
 }
 
-export default TechProfile;
+export default ReceptionProfile;

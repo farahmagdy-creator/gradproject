@@ -71,8 +71,8 @@ function TechSidebar({ activePage, setActivePage }) {
               onClick={() => setActivePage(item.key)}
               style={{
                 border: "none",
-                background: activePage === item.key ? "#eaf2ff" : "transparent",
-                color: activePage === item.key ? "#1d4ed8" : "#4b5563",
+                background: activePage === item.key ? "#dbeafe" : "transparent",
+                color: activePage === item.key ? "#1e3a8a" : "#475569",
                 padding: "13px 14px",
                 borderRadius: "12px",
                 display: "flex",

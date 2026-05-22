@@ -1,9 +1,9 @@
 import { useReceiptForm } from "../hooks/useReceiptForm";
-import CustomerForm from "../components/receipt/CustomerForm";
-import DeviceForm from "../components/receipt/DeviceForm";
-import CostSection from "../components/receipt/CostSection";
-import ImageUploader from "../components/receipt/ImageUploader";
-import TechnicianSection from "../components/receipt/TechnicianSection";
+import CustomerForm from "../receipt/CustomerForm";
+import DeviceForm from "../receipt/DeviceForm";
+import CostSection from "../receipt/CostSection";
+import ImageUploader from "../receipt/ImageUploader";
+import TechnicianSection from "../receipt/TechnicianSection";
 
 import { useState } from "react";
 import { Receipt, Info, FileText } from "lucide-react";

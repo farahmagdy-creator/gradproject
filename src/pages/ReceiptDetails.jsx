@@ -1,13 +1,13 @@
-import ReceiptHeader    from "../components/receiptDetails/ReceiptHeader.jsx";
-import ReceiptInfo      from "../components/receiptDetails/ReceiptInfo.jsx";
-import CustomerDetails  from "../components/receiptDetails/CustomerDetails.jsx";
-import DeviceDetails    from "../components/receiptDetails/DeviceDetails.jsx";
-import PaymentDetails   from "../components/receiptDetails/PaymentDetails.jsx";
-import InternalNotes    from "../components/receiptDetails/InternalNotes.jsx";
-import DeviceImage      from "../components/receiptDetails/DeviceImage.jsx";
-import ReceiptTimeline  from "../components/receiptDetails/ReceiptTimeline.jsx";
-import StatusSection    from "../components/receiptDetails/StatusSection.jsx";
-import Footer           from "../components/receiptDetails/Footer.jsx";
+import ReceiptHeader    from "../receiptDetails/ReceiptHeader.jsx";
+import ReceiptInfo      from "../receiptDetails/ReceiptInfo.jsx";
+import CustomerDetails  from "../receiptDetails/CustomerDetails.jsx";
+import DeviceDetails    from "../receiptDetails/DeviceDetails.jsx";
+import PaymentDetails   from "../receiptDetails/PaymentDetails.jsx";
+import InternalNotes    from "../receiptDetails/InternalNotes.jsx";
+import DeviceImage      from "../receiptDetails/DeviceImage.jsx";
+import ReceiptTimeline  from "../receiptDetails/ReceiptTimeline.jsx";
+import StatusSection    from "../receiptDetails/StatusSection.jsx";
+import Footer           from "../receiptDetails/Footer.jsx";
 
 function ReceiptDetails({ receiptData = {} }) {
   return (

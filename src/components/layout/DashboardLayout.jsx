@@ -45,7 +45,7 @@ function DashboardLayout({ children }) {
             top: 0,
             direction: "rtl",
             borderLeft: "1px solid var(--border-color)",
-            background: "#ffffff",
+            background: "#fff",
           }}
         >
           <Sidebar setShowForm={setShowForm} />

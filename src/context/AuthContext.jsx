@@ -26,7 +26,7 @@ const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
     try {
-      const saved = localStorage.getItem("fixflow_user");
+      const saved = sessionStorage.getItem("fixflow_user");
       return saved ? JSON.parse(saved) : null;
     } catch {
       return null;
@@ -41,7 +41,7 @@ export function AuthProvider({ children }) {
     );
     if (found) {
       setUser(found);
-      localStorage.setItem("fixflow_user", JSON.stringify(found));
+      sessionStorage.setItem("fixflow_user", JSON.stringify(found));
       return { success: true, role: found.role };
     }
     setAuthError("البريد الإلكتروني أو كلمة المرور غير صحيحة");
@@ -59,15 +59,15 @@ export function AuthProvider({ children }) {
       shopName: data.companyName,
     };
     setUser(newUser);
-    localStorage.setItem("fixflow_user", JSON.stringify(newUser));
+    sessionStorage.setItem("fixflow_user", JSON.stringify(newUser));
     return { success: true, role: "receptionist" };
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("fixflow_user");
-    localStorage.removeItem("fixflow_activePage");
-    localStorage.removeItem("fixflow_filter");
+    sessionStorage.removeItem("fixflow_user");
+    sessionStorage.removeItem("fixflow_activePage");
+    sessionStorage.removeItem("fixflow_filter");
     setAuthError("");
   };
 

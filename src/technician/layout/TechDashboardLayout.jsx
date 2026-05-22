@@ -1,46 +1,38 @@
 import { useState } from "react";
 import TechSidebar from "./TechSidebar";
-import TechHeader from "./TechHeader"; 
+import TechHeader  from "./TechHeader";
+import AppLayout   from "../../components/layout/AppLayout";
 import TechProfile from "../pages/TechProfile";
 
 function ComingSoon({ label }) {
   return (
     <div dir="rtl" style={{ padding: "40px", fontWeight: 700 }}>
-      {label}
+      {label} — قريباً
     </div>
   );
 }
 
+const PAGES = {
+  profile:      <TechProfile />,
+  dashboard:    <ComingSoon label="لوحة التحكم" />,
+  receipts:     <ComingSoon label="إيصالاتي" />,
+  history:      <ComingSoon label="سجل الصيانة" />,
+  inventory:    <ComingSoon label="المخزون" />,
+  depreciation: <ComingSoon label="استهلاك المخزون" />,
+  settings:     <ComingSoon label="الإعدادات" />,
+};
+
 function TechDashboardLayout() {
   const [activePage, setActivePage] = useState("profile");
 
-  const renderPage = () => {
-    switch (activePage) {
-      case "profile":   return <TechProfile />;
-      case "dashboard": return <ComingSoon label="لوحة التحكم" />;
-      case "receipts":  return <ComingSoon label="إيصالاتي" />;
-      case "history":   return <ComingSoon label="سجل الصيانة" />;
-      case "inventory": return <ComingSoon label="المخزون" />;
-      default:          return <ComingSoon label="الإعدادات" />;
-    }
-  };
-
   return (
-    <div
-      style={{
-        backgroundColor: "#f5f6fa",
-        minHeight: "100vh",
-        paddingRight: "240px",
-        paddingTop: "64px",
-      }}
-    >
+    <>
       <TechHeader activePage={activePage} setActivePage={setActivePage} />
-      
       <TechSidebar activePage={activePage} setActivePage={setActivePage} />
-      
-      {/* المحتوى الرئيسي */}
-      <main>{renderPage()}</main>
-    </div>
+      <AppLayout headerHeight={64} sidebarWidth={240}>
+        {PAGES[activePage] ?? PAGES.dashboard}
+      </AppLayout>
+    </>
   );
 }
 

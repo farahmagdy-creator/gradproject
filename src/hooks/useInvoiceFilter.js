@@ -14,10 +14,10 @@ const STORAGE_KEYS = {
  */
 export const useInvoiceFilter = (invoices) => {
   const [activeFilter, setActiveFilterState] = useState(
-    () => localStorage.getItem(STORAGE_KEYS.filter) || "الكل"
+    () => sessionStorage.getItem(STORAGE_KEYS.filter) || "الكل"
   );
   const [showUrgentOnly, setShowUrgentOnlyState] = useState(
-    () => localStorage.getItem(STORAGE_KEYS.urgent) === "true"
+    () => sessionStorage.getItem(STORAGE_KEYS.urgent) === "true"
   );
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredInvoices, setFilteredInvoices] = useState(invoices);
@@ -25,12 +25,12 @@ export const useInvoiceFilter = (invoices) => {
   // ── setters مع localStorage sync ─────────────────────────────────────────
   const setActiveFilter = (val) => {
     setActiveFilterState(val);
-    localStorage.setItem(STORAGE_KEYS.filter, val);
+    sessionStorage.setItem(STORAGE_KEYS.filter, val);
   };
 
   const setShowUrgentOnly = (val) => {
     setShowUrgentOnlyState(val);
-    localStorage.setItem(STORAGE_KEYS.urgent, val);
+    sessionStorage.setItem(STORAGE_KEYS.urgent, val);
   };
 
   // ── منطق الفلترة ──────────────────────────────────────────────────────────

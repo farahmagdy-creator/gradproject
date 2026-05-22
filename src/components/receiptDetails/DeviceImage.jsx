@@ -18,7 +18,7 @@ const DeviceImage = ({ imageUrl, fileName, date }) => {
       <div className="position-relative rounded-3 overflow-hidden shadow-sm">
         {/* الصورة الآن ديناميكية تماماً تأخذ القيمة من الـ props فقط */}
         <img 
-          src={imageUrl} 
+          src="image/iphone.jpg" 
           alt="Device Condition" 
           className="img-fluid w-100"
           style={{ objectFit: 'cover', minHeight: '250px' }}
@@ -26,7 +26,7 @@ const DeviceImage = ({ imageUrl, fileName, date }) => {
 
         {/* الشريط الأسود الشفاف السفلي */}
         <div className="position-absolute bottom-0 end-0 m-3 px-3 py-2 rounded-2 text-white" 
-             style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)', fontSize: '12px', direction: 'ltr' }}>
+             style={{ backgroundColor: '#0000008e', fontSize: '12px', direction: 'ltr' }}>
           {date} • {fileName}
         </div>
       </div>

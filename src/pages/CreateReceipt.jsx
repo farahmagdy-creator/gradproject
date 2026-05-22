@@ -6,7 +6,7 @@ import ImageUploader from "../components/receipt/ImageUploader";
 import TechnicianSection from "../components/receipt/TechnicianSection";
 
 import { useState } from "react";
-import { Receipt, Info } from "lucide-react";
+import { Receipt, Info, FileText } from "lucide-react";
 import toast from "react-hot-toast";
 
 function CreateReceipt({ setShowForm }) {
@@ -95,6 +95,7 @@ function CreateReceipt({ setShowForm }) {
               style={{ cursor: "pointer",color: "#ffffff", background: "linear-gradient(to right, #094cb2, #3366cc)", border: "none" }}
             >
               {loading ? "جاري التنفيذ..." : "إصدار الإيصال"}
+                 <FileText size={16} />
             </button>
           </div>
         </div>

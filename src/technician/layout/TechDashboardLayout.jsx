@@ -3,6 +3,9 @@ import TechSidebar from "./TechSidebar";
 import TechHeader  from "./TechHeader";
 import AppLayout   from "../../components/layout/AppLayout";
 import TechProfile from "../pages/TechProfile";
+import TechnicalDashboard from "../pages/TechnicalDashboard";
+import PartsConsumptionPage from "../pages/PartsConsumptionPage";
+import MaintenanceLog from "../pages/MaintenanceLog";
 
 function ComingSoon({ label }) {
   return (
@@ -14,11 +17,11 @@ function ComingSoon({ label }) {
 
 const PAGES = {
   profile:      <TechProfile />,
-  dashboard:    <ComingSoon label="لوحة التحكم" />,
+  dashboard:    <TechnicalDashboard />,
   receipts:     <ComingSoon label="إيصالاتي" />,
-  history:      <ComingSoon label="سجل الصيانة" />,
+  history:      <MaintenanceLog />,
   inventory:    <ComingSoon label="المخزون" />,
-  depreciation: <ComingSoon label="استهلاك المخزون" />,
+  depreciation: <PartsConsumptionPage />,
   settings:     <ComingSoon label="الإعدادات" />,
 };
 

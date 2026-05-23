@@ -6,6 +6,7 @@ import TechProfile from "../pages/TechProfile";
 import TechnicalDashboard from "../pages/TechnicalDashboard";
 import PartsConsumptionPage from "../pages/PartsConsumptionPage";
 import MaintenanceLog from "../pages/MaintenanceLog";
+import PurchasesPage from "../pages/inventory/PurchasesPage";
 
 function ComingSoon({ label }) {
   return (
@@ -16,22 +17,36 @@ function ComingSoon({ label }) {
 }
 
 const PAGES = {
-  profile:      <TechProfile />,
-  dashboard:    <TechnicalDashboard />,
-  receipts:     <ComingSoon label="إيصالاتي" />,
-  history:      <MaintenanceLog />,
-  inventory:    <ComingSoon label="المخزون" />,
-  depreciation: <PartsConsumptionPage />,
-  settings:     <ComingSoon label="الإعدادات" />,
+  profile:        <TechProfile />,
+  dashboard:      <TechnicalDashboard />,
+  receipts:       <ComingSoon label="إيصالاتي" />,
+  history:        <MaintenanceLog />,
+  inventory:      <ComingSoon label="المخزون" />,
+  depreciation:   <PartsConsumptionPage />,
+  settings:       <ComingSoon label="الإعدادات" />,
+  // ── صفحات المخزون ──
+  inv_purchases:  <PurchasesPage />,
+  inv_warehouse:  <ComingSoon label="المخزن" />,
+  inv_sales:      <ComingSoon label="المبيعات" />,
+  inv_sales_main: <ComingSoon label="المبيعات" />,
+  inv_returns:    <ComingSoon label="المرتجعات" />,
+  inv_damages:    <ComingSoon label="التوالف" />,
 };
 
 function TechDashboardLayout() {
-  const [activePage, setActivePage] = useState("profile");
+  const [activePage, setActivePage] = useState(
+    () => sessionStorage.getItem("fixflow_tech_activePage") || "dashboard"
+  );
+
+  const handleNavigate = (page) => {
+    setActivePage(page);
+    sessionStorage.setItem("fixflow_tech_activePage", page);
+  };
 
   return (
     <>
-      <TechHeader activePage={activePage} setActivePage={setActivePage} />
-      <TechSidebar activePage={activePage} setActivePage={setActivePage} />
+      <TechHeader activePage={activePage} setActivePage={handleNavigate} />
+      <TechSidebar activePage={activePage} setActivePage={handleNavigate} />
       <AppLayout headerHeight={64} sidebarWidth={240}>
         {PAGES[activePage] ?? PAGES.dashboard}
       </AppLayout>

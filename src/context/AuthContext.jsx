@@ -65,9 +65,7 @@ export function AuthProvider({ children }) {
 
   const logout = () => {
     setUser(null);
-    sessionStorage.removeItem("fixflow_user");
-    sessionStorage.removeItem("fixflow_activePage");
-    sessionStorage.removeItem("fixflow_filter");
+    sessionStorage.clear();
     setAuthError("");
   };
 

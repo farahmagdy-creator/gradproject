@@ -16,9 +16,6 @@ export const TAG = {
 export const statusesList = ['الكل', ...Object.values(STATUS)];
 
 // ─── بيانات الإيصالات ──────────────────────────────────────────────────────────
-// Schema موحد: id, customerName, phone, device, issue, tech,
-//              receiveDate, deliveryDue, status, tags, deliveredDate, urgent
-
 export const mockInvoices = [
   {
     id: '#1-774',
@@ -67,7 +64,7 @@ export const mockInvoices = [
     customerName: 'سارة محمود',
     phone: '+20 1098765432',
     device: 'iPhone 13',
-    issue: 'كاميرا',
+    issue: 'بطارية',
     tech: 'علي حسن',
     receiveDate: '22-11-2023',
     deliveryDue: '24-11-2023',
@@ -78,9 +75,9 @@ export const mockInvoices = [
   },
   {
     id: '#1-778',
-    customerName: 'أحمد خالد',
+    customerName: 'خالد عبدالله',
     phone: '+20 1122334455',
-    device: 'Huawei P50',
+    device: 'Huawei P40',
     issue: 'شاشة',
     tech: 'محمد عادل',
     receiveDate: '22-11-2023',
@@ -134,14 +131,14 @@ export const mockInvoices = [
   },
 ];
 
-// ─── داشبورد: آخر الإيصالات (مشتق من mockInvoices) ───────────────────────────
+// ─── داشبورد: آخر الإيصالات ───────────────────────────────────────────────────
 export const mockRecentReceipts = mockInvoices.slice(0, 5).map(inv => ({
   ...inv,
   due: inv.deliveryDue,
   tag: inv.tags[0] ?? null,
 }));
 
-// ─── داشبورد: تسليمات اليوم (الجاهزة والقيد الإصلاح) ─────────────────────────
+// ─── داشبورد: تسليمات اليوم ───────────────────────────────────────────────────
 export const mockTodayDeliveries = mockInvoices
   .filter(inv => inv.status === STATUS.READY || inv.status === STATUS.REPAIRING)
   .map(inv => ({
@@ -183,5 +180,70 @@ export const dashboardStats = [
     accent:     '#6d5e00',
     accentBg:   '#f9e37a',
     sub:      'أضف ملاحظاتك للتذكير',
+  },
+];
+
+// ─── بيانات فواتير المشتريات ──────────────────────────────────────────────────
+export const mockPurchaseOrders = [
+  {
+    id: 'TSK-1002',
+    date: '19/3/2026',
+    type: 'شراء',
+    status: 'تحت التسليم',
+    partName: 'شاشة ايفون 14pro oled',
+    purchaseDate: '22/3/2026',
+    purchasePrice: 11300,
+    maxPrice: 12000,
+    purchaseSource: 'حازم علي',
+    deliveryWorker: 'عبدالله',
+    location: 'الكابتن 45',
+    notes: 'جرب شحن و انت هناك علشان الشاشة ماسكة الشحن كمان',
+  },
+  {
+    id: 'REC-1002',
+    date: '22/3/2026',
+    type: 'فاتورة شراء',
+    status: 'منتهي',
+    partName: 'شاشة ايفون 14pro oled',
+    purchaseDate: '22/3/2026',
+    purchasePrice: 11300,
+    maxPrice: 12000,
+    purchaseSource: 'حازم علي',
+    recipient: 'حازم علي',
+    invoiceRecipient: 'حازم علي',
+    deliveryDate: '22/3/2026',
+    totalInvoice: 11300,
+    location: 'الموردة الكابتن 45',
+    notes: null,
+  },
+  {
+    id: 'TSK-1003',
+    date: '19/3/2026',
+    type: 'شراء',
+    status: 'منتهي',
+    partName: 'شاشة ايفون 14pro oled',
+    purchaseDate: '22/3/2026',
+    purchasePrice: 11300,
+    maxPrice: 12000,
+    purchaseSource: 'حازم علي',
+    deliveryWorker: 'عبدالله',
+    recipient: 'حازم علي',
+    location: 'الكابتن 45',
+    notes: 'جرب شحن و انت هناك علشان الشاشة ماسكة الشحن كمان',
+  },
+  {
+    id: 'TSK-1003',
+    date: '19/3/2026',
+    type: 'شراء',
+    status: 'منتهي',
+    partName: 'شاشة ايفون 14pro oled',
+    purchaseDate: '22/3/2026',
+    purchasePrice: 11300,
+    maxPrice: 12000,
+    purchaseSource: 'حازم علي',
+    deliveryWorker: 'عبدالله',
+    recipient: 'حازم علي',
+    location: 'الكابتن 45',
+    notes: 'جرب شحن و انت هناك علشان الشاشة ماسكة الشحن كمان',
   },
 ];

@@ -17,7 +17,7 @@ function AppLayout({ headerHeight = 56, sidebarWidth = 220, children }) {
         minHeight: `calc(100vh - ${headerHeight}px)`,
         backgroundColor: "#f5f6fa",
         overflowY: "auto",
-        padding: "24px",
+        padding: "16px",
       }}
     >
       {children}

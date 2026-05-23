@@ -174,7 +174,7 @@ function AppSidebar({
               alignItems: "center",
               gap: "10px",
               cursor: "pointer",
-              color: "#b91c1c",
+              color: "#ba1a1a",
               fontSize: "13px",
               fontWeight: "bold",
             }}

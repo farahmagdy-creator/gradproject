@@ -184,6 +184,19 @@ export const dashboardStats = [
 ];
 
 // ─── بيانات فواتير المشتريات ──────────────────────────────────────────────────
+export const mockExternalSales = Array.from({ length: 4 }, (_, i) => ({
+  id:            `SREC-${1001 + i}`,
+  date:          "22/3/2026",
+  partName:      "شاشة ايفون 14pro oled",
+  partsCount:    15,
+  totalInvoice:  11300,
+  saleDate:      "22/3/2026",
+  saleSource:    "حازم علي",
+  customer:      "عبدالله السيد",
+  customerPhone: "01228596224",
+  location:      "القاهرة",
+}));
+
 export const mockPurchaseOrders = [
   {
     id: 'TSK-1002',

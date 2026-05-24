@@ -20,7 +20,9 @@ const INVENTORY_NAV_LINKS = [
     key: "inv_sales",
     hasDropdown: true,
     dropdownItems: [
-      { label: "المبيعات",    key: "inv_sales_main"   },
+      { label: "إدارة المبيعات للورشة ",    key: "workshop_sales"   },
+      { label: "إدارة المبيعات الخارجية ",    key: "external_sales"   },
+
     ],
   },
    {
@@ -35,7 +37,11 @@ const INVENTORY_NAV_LINKS = [
 ];
 
 function TechHeader({ activePage, setActivePage }) {
-const isInventory = activePage === "inventory" || activePage.startsWith("inv_");
+const isInventory =
+    activePage === "inventory" ||
+    activePage.startsWith("inv_") ||
+    activePage === "workshop_sales" ||
+    activePage === "external_sales";
   return (
     <AppHeader
       navLinks={isInventory ? INVENTORY_NAV_LINKS : DEFAULT_NAV_LINKS}

@@ -7,6 +7,8 @@ import TechnicalDashboard from "../pages/TechnicalDashboard";
 import PartsConsumptionPage from "../pages/PartsConsumptionPage";
 import MaintenanceLog from "../pages/MaintenanceLog";
 import PurchasesPage from "../pages/inventory/PurchasesPage";
+import SalesManagementPage from "../pages/SalesManagementPage";
+import ExternalSalesPage from "../pages/inventory/ExternalSalesPage";
 
 function ComingSoon({ label }) {
   return (
@@ -31,6 +33,8 @@ const PAGES = {
   inv_sales_main: <ComingSoon label="المبيعات" />,
   inv_returns:    <ComingSoon label="المرتجعات" />,
   inv_damages:    <ComingSoon label="التوالف" />,
+  workshop_sales: <SalesManagementPage />,
+  external_sales: <ExternalSalesPage />,
 };
 
 function TechDashboardLayout() {

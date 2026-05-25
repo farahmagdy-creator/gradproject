@@ -2,18 +2,25 @@
  * PageHeader — كومبوننت مشترك للهيدر + الستات كاردز
  *
  * Props:
- *  - title        : عنوان الصفحة (required)
- *  - subtitle     : النص التوضيحي تحت العنوان
- *  - actionLabel  : نص الزرار
- *  - actionIcon   : أيقونة الزرار (React element)
- *  - onAction     : دالة onClick للزرار
- *  - stats        : [{ title, value, unit?, icon?, iconBg?, colSize? }, ...]
- *                   colSize: 1-12 زي Bootstrap (3 = 25%, 4 = 33%, 6 = 50%)
+ *  - title              : عنوان الصفحة (required)
+ *  - subtitle           : النص التوضيحي تحت العنوان
+ *  - actionLabel        : نص الزرار
+ *  - actionIcon         : أيقونة الزرار (React element)
+ *  - onAction           : دالة onClick للزرار
+ *  - onActionMouseEnter : hover enter
+ *  - onActionMouseLeave : hover leave
+ *  - actionHovered      : boolean للـ hover state
+ *  - stats              : [{ title, value, unit?, icon?, iconBg?, colSize? }, ...]
  */
 
 import React from "react";
 
-const PageHeader = ({ title, subtitle, actionLabel, actionIcon, onAction, stats = [] }) => {
+const PageHeader = ({
+  title, subtitle,
+  actionLabel, actionIcon, onAction,
+  onActionMouseEnter, onActionMouseLeave, actionHovered,
+  stats = [],
+}) => {
   return (
     <>
       {/* ══ Header row ══ */}
@@ -36,13 +43,27 @@ const PageHeader = ({ title, subtitle, actionLabel, actionIcon, onAction, stats 
           <button
             type="button"
             onClick={onAction}
+            onMouseEnter={onActionMouseEnter}
+            onMouseLeave={onActionMouseLeave}
             style={{
-              background: "linear-gradient(to right, #0d47a1, #003178)",
-              color: "#ffffff", border: "none", borderRadius: "10px",
-              padding: "10px 20px", fontSize: "14px",
-              fontFamily: "'Cairo', sans-serif", fontWeight: "600",
-              cursor: "pointer", display: "flex", alignItems: "center",
-              gap: "8px", whiteSpace: "nowrap",
+              background: actionHovered
+                ? "linear-gradient(to right, #1565c0, #0a2a6e)"
+                : "linear-gradient(to right, #0d47a1, #003178)",
+              color: "#ffffff",
+              border: "none",
+              borderRadius: "10px",
+              padding: "10px 20px",
+              fontSize: "14px",
+              fontFamily: "'Cairo', sans-serif",
+              fontWeight: "600",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              whiteSpace: "nowrap",
+              transform: actionHovered ? "translateY(-1px)" : "none",
+              boxShadow: actionHovered ? "0 6px 20px rgba(0,49,120,0.35)" : "none",
+              transition: "all 0.2s ease",
             }}
           >
             {actionIcon}
@@ -58,12 +79,15 @@ const PageHeader = ({ title, subtitle, actionLabel, actionIcon, onAction, stats 
             const cols    = stat.colSize ?? Math.floor(12 / stats.length);
             const widthPc = (cols / 20) * 100;
             return (
-              <div key={i} style={{ flex: `0 0 calc(${widthPc}% - 20px)`, minWidth: 0 }}>
+              <div key={i} style={{ flex: `0 0 calc(${widthPc}% - 16px)`, minWidth: 0 }}>
                 <div
                   style={{
-                    backgroundColor: "#F2F4F6", borderRadius: "8px",
-                    padding: "20px", minHeight: "110px",
-                    display: "flex", alignItems: "center",
+                    backgroundColor: "#F2F4F6",
+                    borderRadius: "8px",
+                    padding: "20px",
+                    minHeight: "110px",
+                    display: "flex",
+                    alignItems: "center",
                     justifyContent: "space-between",
                     fontFamily: "'Cairo', sans-serif",
                   }}
@@ -86,9 +110,13 @@ const PageHeader = ({ title, subtitle, actionLabel, actionIcon, onAction, stats 
                     <div
                       style={{
                         backgroundColor: stat.iconBg ?? "#e9ecef",
-                        borderRadius: "8px", width: "44px", height: "44px",
-                        display: "flex", alignItems: "center",
-                        justifyContent: "center", alignSelf: "flex-start",
+                        borderRadius: "8px",
+                        width: "44px",
+                        height: "44px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        alignSelf: "flex-start",
                       }}
                     >
                       {stat.icon}

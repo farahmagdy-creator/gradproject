@@ -12,8 +12,8 @@ import Sidebar    from "./components/layout/Sidebar";
 
 import Dashboard        from "./pages/Dashboard";
 import InvoicesPage     from "./pages/InvoicesPage";
-import ReceiptDetails   from "./pages/ReceiptDetails";
-import CreateReceipt    from "./pages/CreateReceipt";
+import ReceiptDetails   from "./pages/ReceiptDetails/index";
+import CreateReceipt    from "./pages/CreateReceipt/index";
 import ReceptionProfile from "./pages/ReceptionProfile";
 
 import TechDashboardLayout from "./technician/layout/TechDashboardLayout";
@@ -74,8 +74,8 @@ function RootRouter() {
 
   if (!user) {
     return authScreen === "register"
-      ? <RegisterPage onNavigateLogin={() => setAuthScreen("login")}  onLoginSuccess={() => {}} />
-      : <LoginPage    onNavigateRegister={() => setAuthScreen("register")} onLoginSuccess={() => {}} />;
+      ? <RegisterPage onNavigateLogin={() => setAuthScreen("login")} />
+      : <LoginPage    onNavigateRegister={() => setAuthScreen("register")} />;
   }
 
   if (user.role === "technician")   return <TechDashboardLayout />;

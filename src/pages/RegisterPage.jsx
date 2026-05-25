@@ -66,7 +66,7 @@ function UploadIcon() {
 }
 
 /* ─── RegisterPage ───────────────────────────────────────────────────────── */
-function RegisterPage({ onNavigateLogin, onLoginSuccess }) {
+function RegisterPage({ onNavigateLogin }) {
   const { registerCompany } = useAuth();
   const [form, setForm] = useState({ companyName: "", phone: "", email: "", password: "" });
   const [showPass, setShowPass] = useState(false);
@@ -94,7 +94,6 @@ function RegisterPage({ onNavigateLogin, onLoginSuccess }) {
     setTimeout(() => {
       const result = registerCompany(form);
       setLoading(false);
-      if (result.success) onLoginSuccess(result.role);
     }, 450);
   };
 

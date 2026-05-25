@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Printer, UserPlus, Edit3, PackageCheck, Smartphone, AlertTriangle } from 'lucide-react';
 import OTPModal   from './OTPModal.jsx';
-import PrintView  from '../viewDetails/PrintView.jsx';
+import PrintView  from './print/PrintView.jsx';
 
 const ReceiptHeader = ({ receiptData = {} }) => {
   const [showOTP,   setShowOTP]   = useState(false);

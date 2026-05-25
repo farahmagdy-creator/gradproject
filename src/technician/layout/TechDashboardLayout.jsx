@@ -9,6 +9,7 @@ import MaintenanceLog from "../pages/MaintenanceLog";
 import PurchasesPage from "../pages/inventory/PurchasesPage";
 import SalesManagementPage from "../pages/SalesManagementPage";
 import ExternalSalesPage from "../pages/inventory/ExternalSalesPage";
+import WarehousePage from "../pages/inventory/WarehousePage";
 
 function ComingSoon({ label }) {
   return (
@@ -23,12 +24,12 @@ const PAGES = {
   dashboard:      <TechnicalDashboard />,
   receipts:       <ComingSoon label="إيصالاتي" />,
   history:        <MaintenanceLog />,
-  inventory:      <ComingSoon label="المخزون" />,
+  inventory:      <WarehousePage />, // يشير لنفس inv_warehouse (المخزن الافتراضي)
   depreciation:   <PartsConsumptionPage />,
   settings:       <ComingSoon label="الإعدادات" />,
   // ── صفحات المخزون ──
   inv_purchases:  <PurchasesPage />,
-  inv_warehouse:  <ComingSoon label="المخزن" />,
+  inv_warehouse:  <WarehousePage />,
   inv_sales:      <ComingSoon label="المبيعات" />,
   inv_sales_main: <ComingSoon label="المبيعات" />,
   inv_returns:    <ComingSoon label="المرتجعات" />,

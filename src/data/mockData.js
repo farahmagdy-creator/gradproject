@@ -197,6 +197,46 @@ export const mockExternalSales = Array.from({ length: 4 }, (_, i) => ({
   location:      "القاهرة",
 }));
 
+export const mockPurchaseInvoice = {
+  id:   "INV-2024-001",
+  meta: [
+    { label: "تاريخ الفاتورة", value: "١٥ أكتوبر ٢٠٢٤" },
+    { label: "المورد",          value: "السيد البنا"     },
+    { label: "مشتري الفاتورة", value: "حازم علي"        },
+    { label: "مستلم الفاتورة", value: "محمد عادل"       },
+  ],
+  items: [
+    { name: "شاشة iPhone 13 Pro Max",   supplier: "بيشوي", qty: 2, unitPrice: 450 },
+    { name: "بطارية Samsung S22 Ultra", supplier: "بيشوي", qty: 1, unitPrice: 120 },
+    { name: "بطارية Samsung S22 Ultra", supplier: "بيشوي", qty: 1, unitPrice: 120 },
+    { name: "بطارية Samsung S22 Ultra", supplier: "بيشوي", qty: 1, unitPrice: 120 },
+    { name: "بطارية Samsung S22 Ultra", supplier: "بيشوي", qty: 1, unitPrice: 120 },
+    { name: "بطارية Samsung S22 Ultra", supplier: "بيشوي", qty: 1, unitPrice: 120 },
+    { name: "بطارية Samsung S22 Ultra", supplier: "بيشوي", qty: 1, unitPrice: 120 },
+    { name: "بطارية Samsung S22 Ultra", supplier: "بيشوي", qty: 1, unitPrice: 120 },
+  ],
+};
+
+export const mockSaleInvoice = {
+  id:   "SREC-2024-001",
+  meta: [
+    { label: "تاريخ الفاتورة",  value: "١٥ أكتوبر ٢٠٢٤" },
+    { label: "المشتري",          value: "عبدالله السيد"   },
+    { label: "موبايل المشتري",  value: "01289683584"      },
+    { label: "مصدر الفاتورة",   value: "حازم علي"         },
+  ],
+  items: [
+    { name: "شاشة iPhone 13 Pro Max",   supplier: "بيشوي", qty: 2, unitPrice: 450 },
+    { name: "بطارية Samsung S22 Ultra", supplier: "بيشوي", qty: 1, unitPrice: 120 },
+    { name: "بطارية Samsung S22 Ultra", supplier: "بيشوي", qty: 1, unitPrice: 120 },
+    { name: "بطارية Samsung S22 Ultra", supplier: "بيشوي", qty: 1, unitPrice: 120 },
+    { name: "بطارية Samsung S22 Ultra", supplier: "بيشوي", qty: 1, unitPrice: 120 },
+    { name: "بطارية Samsung S22 Ultra", supplier: "بيشوي", qty: 1, unitPrice: 120 },
+    { name: "بطارية Samsung S22 Ultra", supplier: "بيشوي", qty: 1, unitPrice: 120 },
+    { name: "بطارية Samsung S22 Ultra", supplier: "بيشوي", qty: 1, unitPrice: 120 },
+  ],
+};
+
 export const mockPurchaseOrders = [
   {
     id: 'TSK-1002',
@@ -260,3 +300,23 @@ export const mockPurchaseOrders = [
     notes: 'جرب شحن و انت هناك علشان الشاشة ماسكة الشحن كمان',
   },
 ];
+export const mockInventoryItems = Array.from({ length: 48 }, (_, i) => {
+  const parts = [
+    { name: "شاشة iPhone 13 Pro Max", sku: "IP13PM-SCR-OLED", cost: 450.00, supplier: "البنا",    recipient: "محمد عادل", qty: 24, status: "لم تستخدم" },
+    { name: "بطارية Samsung S22 Ultra", sku: "SAM-S22U-BAT",  cost: 120.00, supplier: "الكابتن",  recipient: "حازم علي",  qty: 3,  status: "مستعملة"  },
+    { name: "آيسي شحن iPhone 11",      sku: "IC-CHG-IP11",   cost: 35.00,  supplier: "شهاب - 45", recipient: "بلال جمال", qty: 50, status: "لم تستخدم" },
+    { name: "شاشة Samsung A54",        sku: "SAM-A54-SCR",   cost: 280.00, supplier: "البنا",     recipient: "محمد عادل", qty: 10, status: "مستعملة"  },
+  ];
+  const p = parts[i % parts.length];
+  return {
+    id:        i + 1,
+    name:      p.name,
+    sku:       p.sku,
+    cost:      p.cost,
+    supplier:  p.supplier,
+    recipient: p.recipient,
+    qty:       p.qty,
+    status:    i % 3 === 1 ? "مستعملة" : "لم تستخدم",
+    date:      "19-11-2023",
+  };
+});

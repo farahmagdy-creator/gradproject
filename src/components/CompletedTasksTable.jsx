@@ -1,7 +1,7 @@
 // src/components/CompletedTasksTable.js
 import React, { useState } from 'react';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
-import StatusIcon from './StatusIcon'; 
+import StatusIcon from './shared/StatusIcon';
 
 export default function CompletedTasksTable({ tasks }) {
   const [currentPage, setCurrentPage] = useState(1);

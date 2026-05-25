@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from "react";
-import FiltersBlade from "../../components/FiltersBlade"; 
-import StatCard from "../../components/StatCard";
+import FiltersBlade from "../../components/shared/FiltersBlade"; 
+import StatCard from "../../components/shared/StatCard";
 import MaintenanceTable from "../../components/MaintenanceTable";
-import SearchBar from "../../components/SearchBar";
+import SearchBar from "../../components/shared/SearchBar";
 import useMaintenanceData from "../../hooks/useMaintenanceData";
 
 export default function MaintenanceLog() {

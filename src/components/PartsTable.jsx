@@ -1,6 +1,6 @@
 import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import StatusIcon from "./StatusIcon";
+import StatusIcon from "./shared/StatusIcon";
 
 const COLUMNS = [
   { key: "partNo",     label: "رقم القطعة",  color: "#191C1E", fontWeight: "400" },

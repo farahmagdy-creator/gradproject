@@ -3,7 +3,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import fixflowLogo from "../../image/fixflow logo.jpg";
 
-function LoginPage({ onNavigateRegister, onLoginSuccess }) {
+function LoginPage({ onNavigateRegister }) {
   const { login, authError } = useAuth();
   const [form, setForm]         = useState({ email: "", password: "" });
   const [showPass, setShowPass] = useState(false);
@@ -17,7 +17,6 @@ function LoginPage({ onNavigateRegister, onLoginSuccess }) {
     setTimeout(() => {
       const result = login(form.email, form.password);
       setLoading(false);
-      if (result.success) onLoginSuccess(result.role);
     }, 380);
   };
 

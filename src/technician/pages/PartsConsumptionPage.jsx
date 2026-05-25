@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import StatCard from "../../components/StatCard";
+import StatCard from "../../components/shared/StatCard";
 import PartsTable from "../../components/PartsTable";
 import DamageCard from "../../components/DamageCard";
 import usePartsConsumption from "../../hooks/usePartsConsumption";

@@ -1,6 +1,6 @@
 import React from "react";
 import { Eye, ChevronLeft, ChevronRight } from "lucide-react";
-import StatusIcon from "./StatusIcon";
+import StatusIcon from "./shared/StatusIcon";
 
 const COLUMNS = [
   "رقم الإيصال", "الجهاز", "العطل", "ما دفعه العميل",

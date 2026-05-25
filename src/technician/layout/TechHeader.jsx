@@ -27,7 +27,8 @@ const INVENTORY_NAV_LINKS = [
     key: "inv_returns",
     hasDropdown: true,
     dropdownItems: [
-      { label: "المرتجعات", key: "inv_returns" },
+      { label: "إدارة مرتجعات المركز للموردين", key: "inv_supplier_returns" },
+      { label: "إدارة مرتجعات العملاء", key: "inv_customer_returns" },
     ],
   },
   { label: "التوالف", key: "inv_damages" },

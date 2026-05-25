@@ -10,6 +10,9 @@ import PurchasesPage from "../pages/inventory/PurchasesPage";
 import SalesManagementPage from "../pages/SalesManagementPage";
 import ExternalSalesPage from "../pages/inventory/ExternalSalesPage";
 import WarehousePage from "../pages/inventory/WarehousePage";
+import DamagedPartsPage from "../pages/inventory/DamagedPartsPage";
+import CenterReturns from "../pages/inventory/CenterReturnsPage";
+import ClientsReturns from "../pages/inventory/ClientsReturns";
 
 function ComingSoon({ label }) {
   return (
@@ -31,9 +34,12 @@ const PAGES = {
   inv_warehouse: <WarehousePage />,
   inv_sales:     <ComingSoon label="المبيعات" />,
   inv_returns:   <ComingSoon label="المرتجعات" />,
-  inv_damages:   <ComingSoon label="التوالف" />,
+  inv_damages:   <DamagedPartsPage />,
   workshop_sales: <SalesManagementPage />,
   external_sales: <ExternalSalesPage />,
+  // صفحات المرتجعات الجديدة
+  inv_supplier_returns: <CenterReturns />,
+  inv_customer_returns: <ClientsReturns />,
 };
 
 function TechDashboardLayout() {

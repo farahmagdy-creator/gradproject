@@ -13,6 +13,7 @@ import WarehousePage from "../pages/inventory/WarehousePage";
 import DamagedPartsPage from "../pages/inventory/DamagedPartsPage";
 import CenterReturns from "../pages/inventory/CenterReturnsPage";
 import ClientsReturns from "../pages/inventory/ClientsReturns";
+import AssignedReceipts from "../pages/AssignedReceipts";
 
 function ComingSoon({ label }) {
   return (
@@ -25,7 +26,7 @@ function ComingSoon({ label }) {
 const PAGES = {
   profile:       <TechProfile />,
   dashboard:     <TechnicalDashboard />,
-  receipts:      <ComingSoon label="إيصالاتي" />,
+  receipts:      <AssignedReceipts />,
   history:       <MaintenanceLog />,
   depreciation:  <PartsConsumptionPage />,
   settings:      <ComingSoon label="الإعدادات" />,

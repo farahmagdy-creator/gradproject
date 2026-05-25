@@ -1,4 +1,5 @@
 import React from "react";
+import { Filter } from "lucide-react";
 
 const FiltersBlade = ({ fromDate, toDate, onFromChange, onToChange, onFilter }) => {
   return (
@@ -38,26 +39,10 @@ const FiltersBlade = ({ fromDate, toDate, onFromChange, onToChange, onFilter }) 
 
       <button
         className="btn btn-sm d-flex align-items-center gap-1 border-0 p-0 fw-semibold"
-        style={{ 
-          color: "#475569", 
-          fontSize: "0.8rem"
-        }}
+        style={{ color: "#475569", fontSize: "0.8rem" }}
         onClick={onFilter}
       >
-        {/* أيقونة التصفية (Filter) كـ inline SVG */}
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          width="13" 
-          height="13" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="2.5" 
-          strokeLinecap="round" 
-          strokeLinejoin="round"
-        >
-          <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-        </svg>
+        <Filter size={13} />
         تصفية
       </button>
 

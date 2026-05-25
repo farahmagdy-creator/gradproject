@@ -20,20 +20,18 @@ function ComingSoon({ label }) {
 }
 
 const PAGES = {
-  profile:        <TechProfile />,
-  dashboard:      <TechnicalDashboard />,
-  receipts:       <ComingSoon label="إيصالاتي" />,
-  history:        <MaintenanceLog />,
-  inventory:      <WarehousePage />, // يشير لنفس inv_warehouse (المخزن الافتراضي)
-  depreciation:   <PartsConsumptionPage />,
-  settings:       <ComingSoon label="الإعدادات" />,
+  profile:       <TechProfile />,
+  dashboard:     <TechnicalDashboard />,
+  receipts:      <ComingSoon label="إيصالاتي" />,
+  history:       <MaintenanceLog />,
+  depreciation:  <PartsConsumptionPage />,
+  settings:      <ComingSoon label="الإعدادات" />,
   // ── صفحات المخزون ──
-  inv_purchases:  <PurchasesPage />,
-  inv_warehouse:  <WarehousePage />,
-  inv_sales:      <ComingSoon label="المبيعات" />,
-  inv_sales_main: <ComingSoon label="المبيعات" />,
-  inv_returns:    <ComingSoon label="المرتجعات" />,
-  inv_damages:    <ComingSoon label="التوالف" />,
+  inv_purchases: <PurchasesPage />,
+  inv_warehouse: <WarehousePage />,
+  inv_sales:     <ComingSoon label="المبيعات" />,
+  inv_returns:   <ComingSoon label="المرتجعات" />,
+  inv_damages:   <ComingSoon label="التوالف" />,
   workshop_sales: <SalesManagementPage />,
   external_sales: <ExternalSalesPage />,
 };

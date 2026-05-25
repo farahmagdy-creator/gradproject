@@ -36,7 +36,7 @@ const PERMISSIONS = [
   "عرض سجل النشاطات",
 ];
 
-function StatCard({ title, value, sub, color, icon }) {
+function ProfileStatCard({ title, value, sub, color, icon }) {
   return (
     <div
       className="p-3 rounded-4 shadow-sm"
@@ -117,14 +117,14 @@ function ReceptionProfile() {
 
       {/* Stats */}
       <div className="d-flex justify-content-center gap-3 mb-5">
-        <StatCard
+        <ProfileStatCard
           title="إجمالي عمليات الإصلاح"
           value="788"
           sub="+12% this month"
           color={COLORS.primary}
           icon={<Wrench size={22} />}
         />
-        <StatCard
+        <ProfileStatCard
           title="معدل دقة بيانات الاستلام"
           value="95%"
           sub="788 reviews"

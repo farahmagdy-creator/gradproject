@@ -18,9 +18,18 @@ export function useWarehouse() {
         item.sku?.toLowerCase().includes(q)  ||
         item.supplier?.toLowerCase().includes(q);
 
-      return matchSearch;
+      // فلترة بالتاريخ — item.date بصيغة "DD-MM-YYYY"
+      let matchDate = true;
+      if (fromDate || toDate) {
+        const [d, m, y] = (item.date || "").split("-");
+        const itemTime  = new Date(`${y}-${m}-${d}`).getTime();
+        if (fromDate && !isNaN(itemTime)) matchDate = matchDate && itemTime >= new Date(fromDate).getTime();
+        if (toDate   && !isNaN(itemTime)) matchDate = matchDate && itemTime <= new Date(toDate).getTime();
+      }
+
+      return matchSearch && matchDate;
     });
-  }, [search]);
+  }, [search, fromDate, toDate]);
 
   const records = useMemo(
     () => filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE),

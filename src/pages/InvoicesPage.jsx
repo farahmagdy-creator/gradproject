@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FilterBar    from "../components/shared/FilterBar";
-import InvoicesTable from "../components/InvoicesTable/InvoicesTable";
+import InvoicesTable from "../components/shared/InvoicesTable";
 import { useInvoiceFilter } from "../hooks/useInvoiceFilter";
 import { mockInvoices } from "../data/mockData";
 

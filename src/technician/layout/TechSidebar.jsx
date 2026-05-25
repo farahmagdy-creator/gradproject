@@ -7,7 +7,7 @@ const NAV_ITEMS = [
   { label: "إيصالاتي",                      key: "receipts",     icon: <ReceiptText size={18} />     },
   { label: "سجل الصيانة",                   key: "history",      icon: <ClipboardList size={18} />   },
   { label: "استهلاك المخزون و التلفيات",    key: "depreciation", icon: <ShelvingUnit size={18} />    },
-  { label: "المخزون",                        key: "inventory",    icon: <Package size={18} />         },
+  { label: "المخزون",                        key: "inv_warehouse", icon: <Package size={18} />         },
   { label: "الملف الشخصي و الأداء",         key: "profile",      icon: <User size={18} />            },
 ];
 

@@ -8,7 +8,7 @@ const STORAGE_KEYS = {
 /**
  * useInvoiceFilter
  * يتحكم في فلترة الإيصالات (حالة + عاجل + بحث).
- * يحفظ اختيارات الفلتر في localStorage عشان تفضل بعد التنقل.
+ * يحفظ اختيارات الفلتر في sessionStorage عشان تفضل بعد التنقل.
  *
  * @param {Array} invoices - مصفوفة الإيصالات الكاملة
  */
@@ -22,7 +22,7 @@ export const useInvoiceFilter = (invoices) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredInvoices, setFilteredInvoices] = useState(invoices);
 
-  // ── setters مع localStorage sync ─────────────────────────────────────────
+  // ── setters مع sessionStorage sync ─────────────────────────────────────────
   const setActiveFilter = (val) => {
     setActiveFilterState(val);
     sessionStorage.setItem(STORAGE_KEYS.filter, val);

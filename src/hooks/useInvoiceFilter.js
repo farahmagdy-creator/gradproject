@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 
 const STORAGE_KEYS = {
   filter: "fixflow_filter",
@@ -20,9 +20,8 @@ export const useInvoiceFilter = (invoices) => {
     () => sessionStorage.getItem(STORAGE_KEYS.urgent) === "true"
   );
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredInvoices, setFilteredInvoices] = useState(invoices);
 
-  // ── setters مع sessionStorage sync ─────────────────────────────────────────
+  // ── setters مع sessionStorage sync ──────────────────────────────────────────
   const setActiveFilter = (val) => {
     setActiveFilterState(val);
     sessionStorage.setItem(STORAGE_KEYS.filter, val);
@@ -33,8 +32,8 @@ export const useInvoiceFilter = (invoices) => {
     sessionStorage.setItem(STORAGE_KEYS.urgent, val);
   };
 
-  // ── منطق الفلترة ──────────────────────────────────────────────────────────
-  useEffect(() => {
+  // ── منطق الفلترة بـ useMemo بدل useEffect (أسرع، بدون render زيادة) ────────
+  const filteredInvoices = useMemo(() => {
     let result = [...invoices];
 
     if (activeFilter !== "الكل") {
@@ -55,7 +54,7 @@ export const useInvoiceFilter = (invoices) => {
       );
     }
 
-    setFilteredInvoices(result);
+    return result;
   }, [activeFilter, showUrgentOnly, searchQuery, invoices]);
 
   return {

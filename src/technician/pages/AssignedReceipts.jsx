@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
-import SearchBar from '../../components/shared/SearchBar'; 
-import FilterButtons from '../../components/shared/FilterTabs';
-import ReceiptsTable from '../../components/ReceiptsTable';
+import { useState } from 'react';
+import SearchBar    from '../../components/shared/SearchBar';
+import FilterTabs   from '../../components/shared/FilterTabs';
+import ReceiptTable  from '../../components/shared/ReceiptTable';
 import { useReceiptsData } from '../../hooks/useReceiptsData';
+
+const TECH_RECEIPTS_COLUMNS = [
+  { key: 'id',         label: 'رقم الإيصال',   width: '100px' },
+  { key: 'customer',   label: 'العميل',          width: '160px' },
+  { key: 'device',     label: 'الجهاز',          width: '140px' },
+  { key: 'issue',      label: 'العطل',           width: '80px'  },
+  { key: 'deliveryDue',label: 'موعد التسليم',    width: '100px' },
+  { key: 'status',     label: 'الحالة',          width: '110px' },
+  { key: 'tags',       label: 'الوسم',           width: '90px'  },
+];
 
 export default function AssignedReceipts({ onViewDetails }) {
   const [searchTerm, setSearchTerm]     = useState('');
@@ -10,123 +20,129 @@ export default function AssignedReceipts({ onViewDetails }) {
 
   const { filteredReceipts } = useReceiptsData(searchTerm, activeFilter);
 
+  // تحويل بيانات الفني لصيغة ReceiptTable الموحدة
+  const rows = filteredReceipts.map((r) => ({
+    id:          r.receiptId,
+    customerName: r.customer,
+    phone:       r.phone,
+    device:      r.device,
+    issue:       r.fault,
+    deliveryDue: r.deadline,
+    status:      r.status,
+    tags:        r.tag ? [r.tag] : [],
+  }));
+
   const urgentReceipt = filteredReceipts.find(
-    (receipt) => receipt.status === 'عاجل' || receipt.tag === 'عاجل'
+    (r) => r.tag === 'عاجل' || r.status === 'عاجل'
   );
 
   return (
-    <div className="bg-light min-vh-100 p-4" style={{ direction: 'rtl' }}>
+    <div style={{ direction: 'rtl', padding: '24px', backgroundColor: '#f5f6fa', minHeight: '100vh' }}>
 
-      <div className="mb-4">
-        <h3 className="fw-bold mb-1" style={{ fontSize: '1.8rem', color: '#191C1E' }}>
+      {/* ─── العنوان ─── */}
+      <div style={{ marginBottom: '20px' }}>
+        <h3 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#191C1E', marginBottom: '4px' }}>
           إيصالاتي الموكلة
         </h3>
-        <p className="text-muted small m-0">إدارة ومتابعة طلبات الصيانة النشطة والجديدة</p>
+        <p style={{ color: '#6b7280', fontSize: '14px', margin: 0 }}>
+          إدارة ومتابعة طلبات الصيانة النشطة والجديدة
+        </p>
       </div>
 
-      <div className="card border-0 shadow-sm p-4 mb-4 rounded-4" style={{ backgroundColor: '#F2F4F6' }}>
-        <div className="row g-3 align-items-center justify-content-between">
-          <div className="col-12 col-lg-4 order-lg-1 order-1">
-            <SearchBar
-              value={searchTerm}
-              onChange={setSearchTerm}
-              placeholder="ابحث برقم الموبايل أو رقم الإيصال..."
-              width="100%"
-            />
-          </div>
-          <FilterButtons activeFilter={activeFilter} onFilterChange={setActiveFilter} />
+      {/* ─── شريط البحث والفلتر ─── */}
+      <div style={{ backgroundColor: '#F2F4F6', borderRadius: '16px', padding: '16px', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center', justifyContent: 'space-between' }}>
+          <SearchBar
+            value={searchTerm}
+            onChange={setSearchTerm}
+            placeholder="ابحث برقم الموبايل أو رقم الإيصال..."
+            width="300px"
+          />
+          <FilterTabs activeFilter={activeFilter} onFilterChange={setActiveFilter} />
         </div>
       </div>
 
-      <ReceiptsTable receipts={filteredReceipts} onViewDetails={onViewDetails} />
+      {/* ─── الجدول ─── */}
+      <ReceiptTable
+        rows={rows}
+        columns={TECH_RECEIPTS_COLUMNS}
+        onView={onViewDetails}
+        countLabel={`${rows.length} إيصال`}
+        emptyMessage="لا توجد إيصالات مطابقة"
+      />
 
-      <div className="row g-4 mt-4">
+      {/* ─── بطاقات المعلومات ─── */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginTop: '24px' }}>
 
-        <div className="col-12 col-md-6">
-          <div className="card shadow-sm p-3 h-100 rounded-4 bg-white"
-            style={{ border: 'none', borderTop: '4px solid #602100' }}>
-            {urgentReceipt ? (
-              <div className="d-flex flex-column h-100">
-                <div className="d-flex justify-content-between align-items-center mt-4">
-                  <span className="badge text-white px-3 py-1 rounded-3 fw-bold"
-                    style={{ fontSize: '0.8rem', backgroundColor: '#BA1A1A' }}>
-                    ! عاجل
-                  </span>
-                  <span className="text-muted small fw-bold" style={{ fontSize: '0.8rem' }}>
-                    {urgentReceipt.receiptId}
-                  </span>
+        {/* بطاقة العاجل */}
+        <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '20px', border: 'none', borderTop: '4px solid #602100', boxShadow: '0 1px 4px rgba(0,0,0,0.06)' }}>
+          {urgentReceipt ? (
+            <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <span style={{ backgroundColor: '#BA1A1A', color: '#fff', padding: '4px 12px', borderRadius: '8px', fontSize: '13px', fontWeight: 'bold' }}>
+                  ! عاجل
+                </span>
+                <span style={{ color: '#9ca3af', fontSize: '13px', fontWeight: 'bold' }}>
+                  {urgentReceipt.receiptId}
+                </span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                <div>
+                  <h4 style={{ fontWeight: 'bold', fontSize: '1.3rem', color: '#191C1E', margin: '0 0 4px' }}>
+                    {urgentReceipt.device}
+                  </h4>
+                  <p style={{ color: '#9ca3af', fontSize: '13px', margin: 0 }}>{urgentReceipt.fault}</p>
                 </div>
-                <div className="mt-auto w-100 d-flex justify-content-between align-items-end">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', textAlign: 'right' }}>
+                  <div style={{ width: '38px', height: '38px', borderRadius: '50%', backgroundColor: '#E1E2EC', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#003178', flexShrink: 0 }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                    </svg>
+                  </div>
                   <div>
-                    <h4 className="fw-bold text-dark mb-1" style={{ fontSize: '1.4rem' }}>
-                      {urgentReceipt.device}
-                    </h4>
-                    <p className="text-muted small m-0 fw-semibold" style={{ fontSize: '0.85rem' }}>
-                      {urgentReceipt.fault}
-                    </p>
-                  </div>
-                  <div className="d-flex align-items-center gap-2 text-end">
-                    <div className="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
-                      style={{ width: '38px', height: '38px', backgroundColor: '#E1E2EC', color: '#003178' }}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                      </svg>
-                    </div>
-                    <div>
-                      <span className="fw-bold d-block text-dark small" style={{ fontSize: '0.85rem' }}>
-                        {urgentReceipt.customer}
-                      </span>
-                      <span className="text-muted d-block" style={{ fontSize: '0.7rem' }}>
-                        الموعد: {urgentReceipt.deadline}
-                      </span>
-                    </div>
+                    <span style={{ fontWeight: 'bold', fontSize: '13px', color: '#191C1E', display: 'block' }}>
+                      {urgentReceipt.customer}
+                    </span>
+                    <span style={{ color: '#9ca3af', fontSize: '11px' }}>
+                      الموعد: {urgentReceipt.deadline}
+                    </span>
                   </div>
                 </div>
               </div>
-            ) : (
-              <div className="d-flex flex-column justify-content-center align-items-center h-100 py-4 text-center">
-                <div className="rounded-circle d-flex align-items-center justify-content-center mb-2"
-                  style={{ width: '50px', height: '50px', backgroundColor: '#F0FDF4', color: '#16A34A' }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                  </svg>
-                </div>
-                <h5 className="fw-bold text-dark mb-1" style={{ fontSize: '1.1rem' }}>الوضع مستقر</h5>
-                <p className="text-muted small m-0">لا توجد إيصالات عاجلة تتطلب إجراءً فورياً حالياً.</p>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px', textAlign: 'center' }}>
+              <div style={{ width: '50px', height: '50px', borderRadius: '50%', backgroundColor: '#F0FDF4', color: '#16A34A', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '12px' }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
               </div>
-            )}
-          </div>
+              <h5 style={{ fontWeight: 'bold', color: '#191C1E', fontSize: '1.1rem', margin: '0 0 4px' }}>الوضع مستقر</h5>
+              <p style={{ color: '#9ca3af', fontSize: '13px', margin: 0 }}>لا توجد إيصالات عاجلة تتطلب إجراءً فورياً.</p>
+            </div>
+          )}
         </div>
 
-        <div className="col-12 col-md-6">
-          <div className="card text-white p-4 h-100 d-flex flex-column justify-content-between position-relative overflow-hidden border-0"
-            style={{ background: '#0043A4', borderRadius: '16px' }}>
-            <div className="position-absolute bottom-0 start-0 m-2 opacity-25">
-              <svg width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
-                style={{ transform: 'translate(-10px, 15px)' }}>
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <circle cx="19" cy="11" r="2"></circle>
-                <path d="M19 8v1"></path><path d="M19 13v1"></path>
-                <path d="M22 11h-1"></path><path d="M17 11h-1"></path>
-              </svg>
-            </div>
-            <div className="text-end">
-              <span className="text-white-50 small fw-bold d-block mb-1" style={{ fontSize: '0.85rem' }}>
-                المهام النشطة
-              </span>
-              <h1 className="fw-bold m-0" style={{ fontSize: '3.5rem', fontFamily: 'sans-serif' }}>
-                {filteredReceipts.length}
-              </h1>
-            </div>
-            <div className="text-end mt-4">
-              <p className="text-white-50 m-0" style={{ fontSize: '0.75rem' }}>
-                محدث تلقائياً بناءً على التصفية
-              </p>
-            </div>
+        {/* بطاقة عدد المهام */}
+        <div style={{ background: '#0043A4', borderRadius: '16px', padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', bottom: 0, left: 0, opacity: 0.15 }}>
+            <svg width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" style={{ transform: 'translate(-10px, 15px)' }}>
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+              <circle cx="19" cy="11" r="2"/><path d="M19 8v1"/><path d="M19 13v1"/>
+              <path d="M22 11h-1"/><path d="M17 11h-1"/>
+            </svg>
           </div>
+          <div style={{ textAlign: 'right' }}>
+            <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '13px', fontWeight: 'bold', display: 'block', marginBottom: '4px' }}>
+              المهام النشطة
+            </span>
+            <h1 style={{ color: '#fff', fontSize: '3.5rem', fontWeight: 'bold', margin: 0 }}>
+              {rows.length}
+            </h1>
+          </div>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '12px', margin: 0, textAlign: 'right' }}>
+            محدث تلقائياً بناءً على التصفية
+          </p>
         </div>
 
       </div>

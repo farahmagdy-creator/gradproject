@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import FiltersBlade from "../../components/shared/FiltersBlade"; 
+import DateRangeFilter from "../../components/shared/DateRangeFilter";
 import StatCard from "../../components/shared/StatCard";
 import MaintenanceTable from "../../components/MaintenanceTable";
 import SearchBar from "../../components/shared/SearchBar";
@@ -91,9 +91,9 @@ export default function MaintenanceLog() {
             />
           </div>
           
-          {/* الفلتر الجديد FiltersBlade مستقر تحت على اليسار */}
+          {/* فلتر التاريخ */}
           <div className="flex-shrink-0">
-            <FiltersBlade
+            <DateRangeFilter
               fromDate={fromDate}
               toDate={toDate}
               onFromChange={setFromDate}

@@ -1,6 +1,5 @@
 // import React, { useState } from "react";
 // import { X, Search, Smartphone, Plus, ChevronRight, ChevronLeft, Check, FileText } from "lucide-react";
-// import DamageCard from "../../../components/DamageCard";
 
 // const RegisterDamagedPartModal = ({ isOpen, onClose, onSave }) => {
 //   const [reason, setReason] = useState(""); // state لسبب التلف
@@ -178,7 +177,7 @@
 
 import React, { useState } from "react";
 import { X, Search, Smartphone, Plus, ChevronRight, ChevronLeft, Check, FileText } from "lucide-react";
-import DamageCard from "../../../components/DamageCard"; // استيراد الكارد الأصلي بتاعك
+import DamageCard from "../../../components/DamageCard";
 
 const RegisterDamagedPartModal = ({ isOpen, onClose, onSave }) => {
   const [reason, setReason] = useState(""); // State لسبب التلف المكتوب

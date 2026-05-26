@@ -10,6 +10,9 @@
  *  - onActionMouseEnter : hover enter
  *  - onActionMouseLeave : hover leave
  *  - actionHovered      : boolean للـ hover state
+ *  - actionBg           : لون الزرار (اختياري - لو مش موجود بيبقى أزرق)
+ *  - actionBgHover      : لون الزرار عند الهوفر (اختياري)
+ *  - actionShadowColor  : لون الظل (اختياري)
  *  - stats              : [{ title, value, unit?, icon?, iconBg?, colSize? }, ...]
  */
 
@@ -19,8 +22,18 @@ const PageHeader = ({
   title, subtitle,
   actionLabel, actionIcon, onAction,
   onActionMouseEnter, onActionMouseLeave, actionHovered,
+  actionBg, actionBgHover, actionShadowColor,
   stats = [],
 }) => {
+
+  const btnBg = actionBg
+    ? (actionHovered && actionBgHover ? actionBgHover : actionBg)
+    : actionHovered
+      ? "linear-gradient(to right, #1565c0, #0a2a6e)"
+      : "linear-gradient(to right, #0d47a1, #003178)";
+
+  const shadowColor = actionShadowColor ?? "rgba(0,49,120,0.25)";
+
   return (
     <>
       {/* ══ Header row ══ */}
@@ -46,14 +59,12 @@ const PageHeader = ({
             onMouseEnter={onActionMouseEnter}
             onMouseLeave={onActionMouseLeave}
             style={{
-              background: actionHovered
-                ? "linear-gradient(to right, #1565c0, #0a2a6e)"
-                : "linear-gradient(to right, #0d47a1, #003178)",
+              background: btnBg,
               color: "#ffffff",
               border: "none",
-              borderRadius: "10px",
-              padding: "10px 20px",
-              fontSize: "14px",
+              borderRadius: "6px",
+              padding: "8px 16px",
+              fontSize: "0.85rem",
               fontFamily: "'Cairo', sans-serif",
               fontWeight: "600",
               cursor: "pointer",
@@ -61,9 +72,11 @@ const PageHeader = ({
               alignItems: "center",
               gap: "8px",
               whiteSpace: "nowrap",
-              transform: actionHovered ? "translateY(-1px)" : "none",
-              boxShadow: actionHovered ? "0 6px 20px rgba(0,49,120,0.35)" : "none",
-              transition: "all 0.2s ease",
+              transform: actionHovered ? "translateY(-1px)" : "translateY(0)",
+              boxShadow: actionHovered
+                ? `0 4px 16px ${shadowColor}`
+                : `0 2px 8px ${shadowColor}`,
+              transition: "background-color 0.2s, transform 0.15s, box-shadow 0.2s",
             }}
           >
             {actionIcon}

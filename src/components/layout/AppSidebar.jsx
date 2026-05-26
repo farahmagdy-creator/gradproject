@@ -35,7 +35,7 @@ function AppSidebar({
         borderLeft: "1px solid #e9ecef",
         position: "fixed",
         right: 0,
-        top: "50px",
+        top: "55px",
         bottom: 0,
         zIndex: 1040,
         display: "flex",

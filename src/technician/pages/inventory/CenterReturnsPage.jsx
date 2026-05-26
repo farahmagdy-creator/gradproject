@@ -1,13 +1,17 @@
-import React from "react";
+import DateRangeFilter from "../../../components/shared/DateRangeFilter";
+import React, { useState } from "react";
 import { useCenterReturns } from "../../../hooks/useCenterReturns";
-import FiltersDropdownBlade from "../../../components/shared/FiltersDropdownBlade";
+
 import SearchBar from "../../../components/shared/SearchBar";
 import DeliveryCard from "../../../components/inventory/DeliveryCard";
 import ReturnCard from "../../../components/inventory/ReturnCard";
+import ClientReturnOrderModal from "../../../components/inventory/ClientReturnOrderModal";
 
 import { CheckSquare, Trash2, FilePlus } from "lucide-react";
 
 export default function CenterReturns() {
+  const [showReturnModal, setShowReturnModal] = useState(false);
+
   const {
     searchQuery,
     setSearchQuery,
@@ -37,9 +41,27 @@ export default function CenterReturns() {
         </div>
         
         {/* زر تسجيل أمر إرجاع لعميل */}
-        <button 
+        <button
+          onClick={() => setShowReturnModal(true)}
           className="btn text-white d-flex align-items-center gap-2 px-3 py-2 fw-semibold"
-          style={{ backgroundColor: "#BA1A1A", borderRadius: "6px", fontSize: "0.85rem", border: "none" }}
+          style={{
+            backgroundColor: "#BA1A1A",
+            borderRadius: "6px",
+            fontSize: "0.85rem",
+            border: "none",
+            transition: "background-color 0.2s, transform 0.15s, box-shadow 0.2s",
+            boxShadow: "0 2px 8px rgba(186,26,26,0.25)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "#93000A";
+            e.currentTarget.style.transform = "translateY(-1px)";
+            e.currentTarget.style.boxShadow = "0 4px 16px rgba(186,26,26,0.35)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "#BA1A1A";
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.boxShadow = "0 2px 8px rgba(186,26,26,0.25)";
+          }}
         >
           <FilePlus size={16} />
           تسجيل أمر إرجاع لعميل
@@ -126,13 +148,23 @@ export default function CenterReturns() {
 
         {/* الفلتر مستقر تماماً في جهة اليسار مع تمرير الـ State باتجاهين */}
         <div className="flex-shrink-0">
-          <FiltersDropdownBlade
+                    <DateRangeFilter
             fromDate={fromDate}
             toDate={toDate}
             onFromChange={setFromDate}
             onToChange={setToDate}
             onFilter={setStatusFilter}
             selectedStatus={statusFilter}
+            variant="white"
+            statusOptions={[
+              { value: "",               label: "تصفية (الكل)"       },
+              { value: "customer_type",  label: "مرتجع عميل"         },
+              { value: "tech_type",      label: "مرتجع فني"          },
+              { value: "before_return",  label: "المورد قبل الإرجاع" },
+              { value: "rejected",       label: "المورد رفض الإرجاع" },
+              { value: "in_progress",    label: "تحت الإرجاع"        },
+              { value: "send_back",      label: "إرجاع للمورد"       },
+            ]}
           />
         </div>
 
@@ -197,6 +229,15 @@ export default function CenterReturns() {
         )}
       </div>
 
+      {/* ─── مودال تسجيل أمر إرجاع لعميل ─── */}
+      <ClientReturnOrderModal
+        show={showReturnModal}
+        onClose={() => setShowReturnModal(false)}
+        onSave={(data) => {
+          console.log("تم حفظ أمر الإرجاع:", data);
+          setShowReturnModal(false);
+        }}
+      />
     </div>
   );
 }

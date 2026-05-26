@@ -4,7 +4,7 @@ import { PlusCircle } from "lucide-react";
 
 import DamageCard from "../../../components/DamageCard";
 import SearchBar from "../../../components/shared/SearchBar";
-import FiltersBlade from "../../../components/shared/FiltersBlade";
+import DateRangeFilter from "../../../components/shared/DateRangeFilter";
 import RegisterDamagedPartModal from "./RegisterDamagedPartModal"; // استيراد المودال المطور
 
 const DamagedPartsPage = () => {
@@ -117,7 +117,7 @@ const DamagedPartsPage = () => {
           />
         </div>
         <div className="flex-shrink-0 ms-md-auto">
-          <FiltersBlade 
+          <DateRangeFilter 
             fromDate={fromDate}
             toDate={toDate}
             onFromChange={setFromDate}

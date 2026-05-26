@@ -3,7 +3,7 @@ import { ReceiptText, Banknote, Archive } from "lucide-react";
 
 import PurchaseOrderCard    from "../../../components/inventory/PurchaseOrderCard";
 import InvoiceModal         from "../../../components/inventory/InvoiceModal";
-import FiltersBlade         from "../../../components/shared/FiltersBlade";
+import DateRangeFilter from "../../../components/shared/DateRangeFilter";
 import SearchBar            from "../../../components/shared/SearchBar";
 import PageHeader           from "../../../components/shared/PageHeader";
 
@@ -68,7 +68,7 @@ const PurchasesPage = () => {
             <SearchBar value={searchQuery} onChange={setSearchQuery} placeholder="البحث برقم الطلب أو اسم القطعة أو المصدر..." />
           </div>
           <div style={{ marginTop: "2px" }}>
-            <FiltersBlade fromDate={fromDate} toDate={toDate} onFromChange={setFromDate} onToChange={setToDate} onFilter={() => {}} />
+            <DateRangeFilter fromDate={fromDate} toDate={toDate} onFromChange={setFromDate} onToChange={setToDate} onFilter={() => {}} />
           </div>
         </div>
 

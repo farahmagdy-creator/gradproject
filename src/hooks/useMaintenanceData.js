@@ -1,62 +1,33 @@
 import { useState, useEffect, useCallback } from "react";
+import { mockMaintenanceStats, mockMaintenanceRecords } from "../data/mockData";
 
 // ============================================================
-// 🔌 API FUNCTIONS — غيري الحاجات دي بس لما الباك يبقى جاهز
+// 🔌 API FUNCTIONS — غيّر الحاجات دي بس لما الباك يبقى جاهز
 // ============================================================
 
-const API_BASE_URL = "https://your-api.com"; // ← غيري اللينك ده
+const API_BASE_URL = "https://your-api.com"; // ← غيّر اللينك ده
 
 async function apiFetchStats() {
-  // ✅ لما الباك يجهز:
+  // ✅ لما الباك يجهز، احذف السطرين دول وفك التعليق عن الكود تحت:
   // const res = await fetch(`${API_BASE_URL}/stats`, {
-  //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+  //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   // });
   // return await res.json();
 
-  // 🔶 مؤقتاً — Mock Data
-  return {
-    totalOperations: 128,
-    totalRevenue: 14250,
-    avgRepairDays: 1.5,
-    myProfit: 7125,
-    technicianName: "شروق",
-    role: "فني صيانة",
-    avatarUrl: null,
-  };
+  return mockMaintenanceStats; // 🔶 مؤقتاً
 }
 
 async function apiFetchRecords({ fromDate, toDate, page, pageSize }) {
-  // ✅ لما الباك يجهز:
+  // ✅ لما الباك يجهز، احذف السطرين دول وفك التعليق عن الكود تحت:
   // const params = new URLSearchParams({ fromDate, toDate, page, pageSize });
   // const res = await fetch(`${API_BASE_URL}/records?${params}`, {
-  //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+  //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   // });
   // const data = await res.json();
   // return { records: data.records, total: data.total };
 
   // 🔶 مؤقتاً — Mock Data
-  const MOCK = Array.from({ length: 20 }, (_, i) => {
-    const statuses   = ["تم التسليم", "جاهز للتسليم", "مرفوض", "قيد الإصلاح"];
-    const devices    = ["iPhone 14 Pro", "Samsung S23", "MacBook Air", "iPad Pro"];
-    const issues     = ["تغيير شاشة", "بطارية", "كاميرا خلفية", "سماعة داخلية"];
-    const clientPaid = [1200, 2000, 4500, 800][i % 4];
-    const cost       = [400, 800, 2500, 300][i % 4];
-    const net        = clientPaid - cost;
-    const techShare  = Math.round(net * 0.25);
-    return {
-      id: i + 1,
-      receiptNo: `774-${100 + i}`,
-      device: devices[i % devices.length],
-      issue: issues[i % issues.length],
-      clientPaid, cost, net, techShare,
-      receivedDate: `2026-05-${String((i % 14) + 1).padStart(2, "0")}`,
-      readyDate: `2026-05-${String((i % 14) + 2).padStart(2, "0")}`,
-      deliveryDate: i % 2 === 0 ? `2026-05-${String((i % 14) + 3).padStart(2, "0")}` : "—",
-      status: statuses[i % statuses.length],
-    };
-  });
-
-  let filtered = [...MOCK];
+  let filtered = [...mockMaintenanceRecords];
   if (fromDate) filtered = filtered.filter((r) => new Date(r.receivedDate) >= new Date(fromDate));
   if (toDate)   filtered = filtered.filter((r) => new Date(r.receivedDate) <= new Date(toDate));
   const total = filtered.length;
@@ -65,22 +36,21 @@ async function apiFetchRecords({ fromDate, toDate, page, pageSize }) {
 }
 
 async function apiUpdateStatus(id, newStatus, deliveryDate) {
-  // ✅ لما الباك يجهز:
+  // ✅ لما الباك يجهز، فك التعليق:
   // await fetch(`${API_BASE_URL}/records/${id}/status`, {
   //   method: "PATCH",
   //   headers: {
   //     "Content-Type": "application/json",
-  //     Authorization: `Bearer ${localStorage.getItem("token")}`
+  //     Authorization: `Bearer ${localStorage.getItem("token")}`,
   //   },
-  //   body: JSON.stringify({ status: newStatus, deliveryDate })
+  //   body: JSON.stringify({ status: newStatus, deliveryDate }),
   // });
 
-  // 🔶 مؤقتاً — بنعمل حاجة زي console log
-  console.log("Update status:", { id, newStatus, deliveryDate });
+  console.log("Update status:", { id, newStatus, deliveryDate }); // 🔶 مؤقتاً
 }
 
 // ============================================================
-// 🧠 HOOK — متلمسيش الكود ده خالص
+// 🧠 HOOK — متلمسش الكود ده خالص
 // ============================================================
 
 export default function useMaintenanceData() {
@@ -111,8 +81,8 @@ export default function useMaintenanceData() {
     try {
       const { records, total } = await apiFetchRecords({
         fromDate: from,
-        toDate: to,
-        page: pg,
+        toDate:   to,
+        page:     pg,
         pageSize: PAGE_SIZE,
       });
       setRecords(records);
@@ -128,18 +98,15 @@ export default function useMaintenanceData() {
     loadRecords(page, fromDate, toDate);
   }, [page, loadRecords]);
 
-  // تصفية
   const handleFilter = () => {
     setPage(1);
     loadRecords(1, fromDate, toDate);
   };
 
-  // تحديث الحالة
   const updateRecordStatus = async (id, newStatus) => {
     const deliveryDate = newStatus === "تم التسليم" ? today : null;
     try {
       await apiUpdateStatus(id, newStatus, deliveryDate);
-      // تحديث الـ UI بدون ما نعمل refetch كامل
       setRecords((prev) =>
         prev.map((r) =>
           r.id === id

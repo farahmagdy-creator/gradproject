@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function FilterButtons({ activeFilter, onFilterChange }) {
+export default function FilterTabs({ activeFilter, onFilterChange }) {
   const filters = [
     { name: 'الكل', key: 'الكل' },
     { name: 'قيد الانتظار', key: 'قيد الانتظار' },

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ReceiptText, Banknote, Package, Archive } from "lucide-react";
 
 import InventoryTable from "../../../components/inventory/InventoryTable";
-import FiltersBlade   from "../../../components/shared/FiltersBlade";
+import DateRangeFilter from "../../../components/shared/DateRangeFilter";
 import SearchBar      from "../../../components/shared/SearchBar";
 import PageHeader     from "../../../components/shared/PageHeader";
 import PurchaseFormModal from "../../../components/inventory/PurchaseFormModal";
@@ -63,7 +63,7 @@ const WarehousePage = () => {
             />
           </div>
           <div style={{ marginTop: "2px" }}>
-            <FiltersBlade
+            <DateRangeFilter
               fromDate={fromDate}
               toDate={toDate}
               onFromChange={setFromDate}

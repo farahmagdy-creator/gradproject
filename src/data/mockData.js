@@ -598,3 +598,24 @@ export const mockEmployeesSummary = {
   techCount:     mockEmployees.filter(e => e.role === EMPLOYEE_ROLE.HARDWARE_TECH || e.role === EMPLOYEE_ROLE.SOFTWARE_TECH).length,
   activeAccounts: mockEmployees.length,
 };
+
+// إضافة موظف جديد لمصدر البيانات الوهمي + تحديث ملخص الإحصائيات
+export function addMockEmployee(employee) {
+  const nextEmpId = `EMP-${String(mockEmployees.length + 1).padStart(3, "0")}`;
+  const newEmployee = {
+    id: mockEmployees.length + 1,
+    empId: nextEmpId,
+    status: EMPLOYEE_STATUS.ACTIVE,
+    ...employee,
+  };
+
+  mockEmployees.push(newEmployee);
+
+  mockEmployeesSummary.activeAccounts = mockEmployees.length;
+  mockEmployeesSummary.techCount = mockEmployees.filter(
+    e => e.role === EMPLOYEE_ROLE.HARDWARE_TECH || e.role === EMPLOYEE_ROLE.SOFTWARE_TECH
+  ).length;
+  mockEmployeesSummary.deliveryCount = mockEmployees.filter(e => e.role === EMPLOYEE_ROLE.DELIVERY).length;
+
+  return newEmployee;
+}

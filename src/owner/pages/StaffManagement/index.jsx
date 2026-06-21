@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { UserPlus, AlertCircle, Wrench, CheckCircle2 } from "lucide-react";
 
 import PageHeader        from "../../../components/shared/PageHeader";
 import EmployeesFilterBar from "./EmployeesFilterBar";
 import EmployeesTable     from "./EmployeesTable";
 import EmployeeStatCard   from "./EmployeeStatCard";
+import AddEmployeeForm    from "./AddEmployeeForm";
 import useEmployees        from "../../../hooks/useEmployees";
 
 /**
@@ -14,6 +15,8 @@ import useEmployees        from "../../../hooks/useEmployees";
  *  - onViewEmployee : callback(employee) — اختياري، لعرض تفاصيل الموظف
  */
 const StaffManagementPage = ({ onViewEmployee }) => {
+  const [showAddEmployee, setShowAddEmployee] = useState(false);
+
   const {
     records, summary, loading,
     search, setSearch,
@@ -22,6 +25,10 @@ const StaffManagementPage = ({ onViewEmployee }) => {
     page, setPage,
     PAGE_SIZE, totalCount,
   } = useEmployees();
+
+  if (showAddEmployee) {
+    return <AddEmployeeForm onClose={() => setShowAddEmployee(false)} />;
+  }
 
   return (
     <div dir="rtl" style={{ fontFamily: "'Cairo', sans-serif", backgroundColor: "#F8F9FB", minHeight: "100vh" }}>
@@ -80,7 +87,7 @@ const StaffManagementPage = ({ onViewEmployee }) => {
           setSearch={setSearch}
           actionLabel="إضافة موظف جديد"
           actionIcon={<UserPlus size={16} />}
-          onAction={() => {}}
+          onAction={() => setShowAddEmployee(true)}
         />
 
         {/* ══ Table ══ */}

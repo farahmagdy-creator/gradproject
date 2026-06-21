@@ -1,16 +1,9 @@
 import { Info, UserCog, IdCard } from "lucide-react";
 import COLORS from "../../constants/theme";
+import PermissionsGrid, { ALL_PERMISSIONS } from "./PermissionsGrid";
 
-// ─── ثوابت مشتركة ────────────────────────────────────────────────────────────
-
-// الصلاحيات المتاحة 
-export const ALL_PERMISSIONS = [
-  "استلام جهاز",         "تسليم جهاز",           "طلب قطعة غيار",        "تغيير حالة الإيصال",
-  "تعيين أجهزة للفني",   "عرض المخزون",           "إضافة للمخزون",         "استخدام المخزون",
-  "إنشاء فاتورة شراء",   "إنشاء فاتورة بيع",      "تسجيل تلف قطعة",       "إرجاع قطعة للمورد",
-  "إرجاع قطعة لعميل",    "صيانة الأجهزة",         "تعيين مهام للتوصيل",    "استلام طلبات الغير",
-  "عرض يومية الحساب",    "إدارة الموظفين",         "إرسال تنبيهات",         "عرض سجل النشاطات",
-];
+// إعادة تصديرها عشان أي حد كان مستورد ALL_PERMISSIONS من هنا قبل كدا يفضل شغال
+export { ALL_PERMISSIONS };
 
 // ─── ProfileStatCard (مشترك) ──────────────────────────────────────────────────
 
@@ -153,24 +146,7 @@ function ProfilePage({ user, avatarSrc, hireDateLabel = "تاريخ التعيي
             </h3>
           </div>
           <p style={{ color: "#094cb2" }}>الصلاحيات الممنوحة</p>
-          <div className="rounded-4 p-3" style={{ background: "#f5f3f4" }}>
-            <div className="row row-cols-4 g-2">
-              {ALL_PERMISSIONS.map((perm) => (
-                <div
-                  key={perm}
-                  className="col d-flex align-items-center justify-content-end gap-2"
-                  style={{ direction: "ltr" }}
-                >
-                  <span style={{ fontSize: "14px" }}>{perm}</span>
-                  <input
-                    type="checkbox"
-                    className="form-check-input mt-0"
-                    style={{ width: "18px", height: "18px", flexShrink: 0 }}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+          <PermissionsGrid selected={user.permissions ?? []} readOnly />
         </div>
 
       </div>

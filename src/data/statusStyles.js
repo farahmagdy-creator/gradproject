@@ -16,3 +16,9 @@ export const TAG_STYLE = {
 };
 
 export const DEFAULT_STATUS_STYLE = { color: '#333', background: '#e9ecef' };
+
+// ─── حالات الموظفين ──────────────────────────────────────────────────────────
+export const EMPLOYEE_STATUS_STYLE = {
+  'نشط':   { color: '#ffffff', background: '#28a745' },
+  'موقوف': { color: '#ffffff', background: '#979D98' },
+};

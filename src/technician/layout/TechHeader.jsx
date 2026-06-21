@@ -45,7 +45,7 @@ function TechHeader({ activePage, setActivePage }) {
       navLinks={isInventory ? INVENTORY_NAV_LINKS : DEFAULT_NAV_LINKS}
       activePage={activePage}
       onNavigate={setActivePage}
-      avatarSrc="image/tech nav photo.jpg"
+      avatarSrc="image/photo.jpg"
       height={64}
     />
   );

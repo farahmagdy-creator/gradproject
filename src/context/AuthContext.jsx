@@ -19,6 +19,14 @@ const MOCK_USERS = [
     specialty: "فني سوفتوير و هاردوير للايفون",
     joinDate: "1/5/2021",
   },
+  {
+    id: 3,
+    email: "owner@fixflow.com",
+    password: "123456",
+    role: "owner",
+    name: "عباد الرحمن",
+    shopName: "عباد الرحمن لخدمات المحمول",
+  },
 ];
 
 const AuthContext = createContext(null);

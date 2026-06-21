@@ -1,19 +1,21 @@
-import { Wrench, Clock, AlertTriangle } from "lucide-react";
-import { useDashboard } from "../hooks/useDashboard";
-import DashboardReceiptsTable from "../components/shared/DashboardReceiptsTable";
+import { AlertTriangle, CheckCircle2, Wrench } from "lucide-react";
+import { useOwnerDashboard } from "../../hooks/useOwnerDashboard";
+import DashboardReceiptsTable from "../../components/shared/DashboardReceiptsTable";
+import WorkshopPerformanceCard from "../../components/shared/WorkshopPerformanceCard";
 
 // ─── أيقونات بطاقات الإحصائيات ───────────────────────────────────────────────
+const STAT_ICONS = {
+  alert: <AlertTriangle size={22} />,
+  check: <CheckCircle2 size={22} />,
+  wrench: <Wrench size={22} />,
+};
 
-const STAT_ICONS = [
-  <Wrench size={22} />,
-  <AlertTriangle size={22} />,
-  <Clock size={22} />,
-];
-
-// ─── المكون ───────────────────────────────────────────────────────────────────
-
-function Dashboard() {
-  const { stats, recentReceipts, todayDeliveries } = useDashboard();
+/**
+ * OwnerDashboard — "لوحة التحكم" بتاعة المالك (نظرة عامة)
+ * بتتفتح من الهيدر أو السايد بار لما يدوس المالك على "لوحة التحكم"
+ */
+function OwnerDashboard() {
+  const { stats, recentUpdates, performance } = useOwnerDashboard();
 
   return (
     <div style={{ direction: "rtl", padding: "28px", backgroundColor: "#f5f6fa", minHeight: "100vh" }}>
@@ -24,7 +26,7 @@ function Dashboard() {
           نظرة عامة
         </h4>
         <p style={{ color: "#434653", fontSize: "16px", margin: 0 }}>
-          مرحبا بك . إليك ملخص اليوم .
+          مرحباً بك . إليك الحالة الحالية لورشة الصيانة .
         </p>
       </div>
 
@@ -47,7 +49,7 @@ function Dashboard() {
                 {s.badge}
               </span>
               <div style={{ width: 40, height: 40, background: s.accentBg, color: s.accent, borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                {STAT_ICONS[i]}
+                {STAT_ICONS[s.icon]}
               </div>
             </div>
             <div style={{ textAlign: "right" }}>
@@ -65,24 +67,20 @@ function Dashboard() {
         ))}
       </div>
 
-      {/* ─── جدول آخر التسليمات ─── */}
+      {/* ─── جدول آخر التحديثات ─── */}
       <div style={{ marginBottom: "24px" }}>
         <DashboardReceiptsTable
-          title="آخر التسليمات"
+          title="آخر التحديثات"
           titleColor="#1e3a8a"
-          rows={recentReceipts}
+          rows={recentUpdates}
         />
       </div>
 
-      {/* ─── جدول أجهزة تسلم اليوم ─── */}
-      <DashboardReceiptsTable
-        title="أجهزة تسلم اليوم"
-        titleColor="#ba1a1a"
-        rows={todayDeliveries}
-      />
+      {/* ─── أداء الورشة ─── */}
+      <WorkshopPerformanceCard data={performance} />
 
     </div>
   );
 }
 
-export default Dashboard;
+export default OwnerDashboard;

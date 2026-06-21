@@ -61,12 +61,12 @@ function AppSidebar({
             />
           )}
           {userName && (
-            <h3 style={{ fontSize: "18px", margin: "0 0 4px", color: "#1e3a8a", fontWeight: 800 }}>
+            <h3 style={{ fontSize: "18px", margin: "0 0 4px", color: "#1d4ed8", fontWeight: "bold" }}>
               {userName}
             </h3>
           )}
           {userRole && (
-            <span style={{ color: "#434652", fontSize: "13px" }}>{userRole}</span>
+            <span style={{ color: "#1d4ed8", fontSize: "13px", fontWeight: "bold" }}>{userRole}</span>
           )}
         </div>
       )}

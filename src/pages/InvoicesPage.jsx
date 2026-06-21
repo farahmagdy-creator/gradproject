@@ -28,7 +28,7 @@ const InvoicesPage = ({ onViewReceipt }) => {
   const countLabel  = `عرض ${Math.min(currentPage * ITEMS_PER_PAGE, filteredInvoices.length)} من أصل ${filteredInvoices.length} إيصال`;
 
   return (
-    <div style={{ direction: "rtl", backgroundColor: "#f5f6fa", minHeight: "100vh", padding: "28px" }}>
+    <div style={{ direction: "rtl", backgroundColor: "#f5f6fa", minHeight: "100vh", padding: "0 28px 28px" }}>
       <FilterBar
         activeFilter={activeFilter}       setActiveFilter={resetPage(setActiveFilter)}
         showUrgentOnly={showUrgentOnly}   setShowUrgentOnly={resetPage(setShowUrgentOnly)}

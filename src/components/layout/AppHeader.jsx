@@ -11,7 +11,7 @@ import { Bell, ChevronDown } from "lucide-react";
  *  - avatarSrc   : مسار صورة البروفايل
  *  - height      : ارتفاع الهيدر (default 56px)
  */
-function AppHeader({ navLinks = [], activePage, onNavigate, avatarSrc = "image/tech nav photo.jpg", height = 56 }) {
+function AppHeader({ navLinks = [], activePage, onNavigate, avatarSrc = "image/photo.jpg", height = 56 }) {
   const [openDropdown, setOpenDropdown] = useState(null);
   const dropdownRef = useRef(null);
 
@@ -157,7 +157,7 @@ function AppHeader({ navLinks = [], activePage, onNavigate, avatarSrc = "image/t
       <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
         <Bell size={20} color="#6c757d" style={{ cursor: "pointer" }} />
         <img
-          src={avatarSrc}
+          src= "image/photo.jpg"
           alt="avatar"
           style={{
             width: 34, height: 34,

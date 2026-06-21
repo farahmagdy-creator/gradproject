@@ -17,6 +17,7 @@ import CreateReceipt    from "./pages/CreateReceipt/index";
 import ReceptionProfile from "./pages/ReceptionProfile";
 
 import TechDashboardLayout from "./technician/layout/TechDashboardLayout";
+import OwnerDashboardLayout from "./owner/layout/OwnerDashboardLayout";
 
 // ─── صفحات الريسبشن ───────────────────────────────────────────────────────────
 
@@ -79,6 +80,7 @@ function RootRouter() {
   }
 
   if (user.role === "technician")   return <TechDashboardLayout />;
+  if (user.role === "owner")        return <OwnerDashboardLayout />;
   return <ReceptionistApp />;
 }
 

@@ -15,6 +15,21 @@ export const TAG = {
 
 export const statusesList = ['الكل', ...Object.values(STATUS)];
 
+// ─── أدوار وحالات الموظفين ──────────────────────────────────────────────────────
+export const EMPLOYEE_ROLE = {
+  SOFTWARE_TECH: 'فني سوفتوير',
+  HARDWARE_TECH: 'فني هاردوير',
+  RECEPTION:     'موظفة استقبال',
+  DELIVERY:      'عامل توصيل',
+};
+
+export const EMPLOYEE_STATUS = {
+  ACTIVE:    'نشط',
+  SUSPENDED: 'موقوف',
+};
+
+export const employeeRolesList = ['جميع الأدوار', ...Object.values(EMPLOYEE_ROLE)];
+
 // ─── بيانات الإيصالات ──────────────────────────────────────────────────────────
 export const mockInvoices = [
   {
@@ -146,6 +161,62 @@ export const mockTodayDeliveries = mockInvoices
     due: inv.deliveryDue,
     tag: inv.tags[0] ?? null,
   }));
+
+// ─── بطاقات إحصائيات لوحة تحكم المالك ─────────────────────────────────────────
+export const ownerDashboardStats = [
+  {
+    label:      'إصلاحات متأخرة',
+    value:      String(mockInvoices.filter(i => i.urgent && i.status !== STATUS.DELIVERED).length).padStart(2, '0'),
+    badge:      'محرج',
+    badgeColor: '#ba1a1a',
+    badgeBg:    '#ffdad6',
+    accent:     '#ba1a1a',
+    accentBg:   '#ffdad6',
+    sub:        'يتطلب اهتماماً فورياً',
+    subColor:   '#ba1a1a',
+    icon:       'alert',
+  },
+  {
+    label:      'بانتظار الاستلام',
+    value:      String(mockInvoices.filter(i => i.status === STATUS.READY).length).padStart(2, '0'),
+    badge:      'جاهز',
+    badgeColor: '#7a5b00',
+    badgeBg:    '#fff3cd',
+    accent:     '#c79100',
+    accentBg:   '#fff3cd',
+    sub:        'إخطار العملاء بموعدهم اليوم',
+    icon:       'check',
+  },
+  {
+    label:      'قيد التنفيذ',
+    value:      String(mockInvoices.filter(i => i.status === STATUS.WAITING || i.status === STATUS.REPAIRING).length).padStart(2, '0'),
+    badge:      'نشط',
+    badgeColor: '#0f6b5c',
+    badgeBg:    '#d3f5ec',
+    accent:     '#0f6b5c',
+    accentBg:   '#d3f5ec',
+    sub:        'متوسط وقت الإنجاز: 2.4 يوم',
+    icon:       'wrench',
+  },
+];
+
+// ─── جدول آخر التحديثات (لوحة تحكم المالك) ────────────────────────────────────
+export const ownerRecentUpdates = mockInvoices.map(inv => ({
+  ...inv,
+  due: inv.deliveryDue,
+  tag: inv.tags[0] ?? null,
+}));
+
+// ─── أداء الورشة (آخر 7 أيام) ──────────────────────────────────────────────────
+export const workshopPerformance = [
+  { day: 'الأحد',     value: 4  },
+  { day: 'السبت',     value: 6  },
+  { day: 'الجمعة',    value: 11 },
+  { day: 'الخميس',    value: 7  },
+  { day: 'الأربعاء',  value: 9  },
+  { day: 'الثلاثاء',  value: 8  },
+  { day: 'الاثنين',   value: 5  },
+];
 
 // ─── بطاقات إحصائيات الداشبورد ────────────────────────────────────────────────
 export const dashboardStats = [
@@ -507,3 +578,23 @@ export const mockTechReceipts = [
   { id: 11, receiptId: '#1-784', customer: 'مينا سمير',   phone: '+20 15 2222 3333',  device: 'Pixel 7 Pro',        fault: 'شحن',     technician: 'غير معين', deadline: 'بعد 3 ساعات', status: 'في الانتظار',  tag: 'إتصال أولاً' },
   { id: 12, receiptId: '#1-785', customer: 'هدى سلطان',   phone: '+20 12 4444 5555',  device: 'Galaxy Buds 2',      fault: 'سماعة',   technician: 'غير معين', deadline: 'بعد 1 يوم',   status: 'جاهز للتسليم', tag: 'إتصال أولاً' },
 ];
+
+// ─── موظفو المالك ──────────────────────────────────────────────────────────────
+export const mockEmployees = [
+  { id: 1,  empId: 'EMP-001', name: 'بلال جمال',  role: EMPLOYEE_ROLE.SOFTWARE_TECH, email: 'thisisanemail@gmail.com', status: EMPLOYEE_STATUS.ACTIVE    },
+  { id: 2,  empId: 'EMP-002', name: 'محمد عادل',  role: EMPLOYEE_ROLE.HARDWARE_TECH, email: 'thisisanemail@gmail.com', status: EMPLOYEE_STATUS.ACTIVE    },
+  { id: 3,  empId: 'EMP-003', name: 'حازم علي',   role: EMPLOYEE_ROLE.HARDWARE_TECH, email: 'thisisanemail@gmail.com', status: EMPLOYEE_STATUS.ACTIVE    },
+  { id: 4,  empId: 'EMP-004', name: 'مينا مسعد',  role: EMPLOYEE_ROLE.HARDWARE_TECH, email: 'thisisanemail@gmail.com', status: EMPLOYEE_STATUS.SUSPENDED },
+  { id: 5,  empId: 'EMP-005', name: 'الاء احمد',  role: EMPLOYEE_ROLE.RECEPTION,     email: 'thisisanemail@gmail.com', status: EMPLOYEE_STATUS.ACTIVE    },
+  { id: 6,  empId: 'EMP-001', name: 'بلال جمال',  role: EMPLOYEE_ROLE.SOFTWARE_TECH, email: 'thisisanemail@gmail.com', status: EMPLOYEE_STATUS.ACTIVE    },
+  { id: 7,  empId: 'EMP-002', name: 'محمد عادل',  role: EMPLOYEE_ROLE.HARDWARE_TECH, email: 'thisisanemail@gmail.com', status: EMPLOYEE_STATUS.ACTIVE    },
+  { id: 8,  empId: 'EMP-003', name: 'حازم علي',   role: EMPLOYEE_ROLE.HARDWARE_TECH, email: 'thisisanemail@gmail.com', status: EMPLOYEE_STATUS.ACTIVE    },
+  { id: 9,  empId: 'EMP-004', name: 'مينا مسعد',  role: EMPLOYEE_ROLE.HARDWARE_TECH, email: 'thisisanemail@gmail.com', status: EMPLOYEE_STATUS.SUSPENDED },
+  { id: 10, empId: 'EMP-005', name: 'الاء احمد',  role: EMPLOYEE_ROLE.RECEPTION,     email: 'thisisanemail@gmail.com', status: EMPLOYEE_STATUS.ACTIVE    },
+];
+
+export const mockEmployeesSummary = {
+  deliveryCount: mockEmployees.filter(e => e.role === EMPLOYEE_ROLE.DELIVERY).length,
+  techCount:     mockEmployees.filter(e => e.role === EMPLOYEE_ROLE.HARDWARE_TECH || e.role === EMPLOYEE_ROLE.SOFTWARE_TECH).length,
+  activeAccounts: mockEmployees.length,
+};
